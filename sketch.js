@@ -9,6 +9,7 @@ var drops = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  bg = loadImage('assets/level1.png');
   ellipseMode(CENTER);
   textAlign(CENTER);
   noFill();
@@ -26,7 +27,8 @@ function setup() {
 }
 
 function draw() {
-  background(255);
+//  background(255);
+  background(bg);
 
   // bricks
   for (var i = bricks.length - 1; i >= 0; i--) {
