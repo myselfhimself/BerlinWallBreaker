@@ -34,7 +34,7 @@ function setup() {
 
   setupBricks();
   createText();
-  homeText.style('display', 'block');
+  homeText.show();
 }
 
 function setupBg() {
@@ -59,12 +59,12 @@ function draw() {
   background(bg);
   console.log("state:" + GAME_STATE.toString() + " level:" + GAME_LEVEL.toString());
   if (GAME_STATE == GAME_STATE_HOME_BANNER) {
-    homeText.style('display', 'block');
+    homeText.show();
     board.display();
   } else if (GAME_STATE == GAME_STATE_PLAYING) {
-    homeText.style('display', 'none');
-    retryText.style('display', 'none');
-    nextLevelText.style('display', 'none');
+    homeText.hide();
+    retryText.hide();
+    nextLevelText.hide();
     // bricks
     for (var i = bricks.length - 1; i >= 0; i--) {
       if (ball.hits(bricks[i])) {
@@ -103,10 +103,10 @@ function draw() {
       GAME_STATE = GAME_LEVEL < GAME_LEVEL_MAX ? GAME_STATE_NEXT_LEVEL_BANNER : GAME_STATE_FINISHED_BANNER;
     }
   } else if(GAME_STATE == GAME_STATE_RETRY_BANNER) {
-    retryText.style('display', 'block');
+    retryText.show();
   } else if(GAME_STATE == GAME_STATE_NEXT_LEVEL_BANNER) {
     updateNextLevelText();
-    nextLevelText.style('display', 'block');  
+    nextLevelText.show();  
     for (var i = 0; i < drops.length; i++) {
       drops[i].fall();
       drops[i].show();
@@ -114,7 +114,7 @@ function draw() {
     setupBricks();
  
   } else if(GAME_STATE == GAME_STATE_FINISHED_BANNER) {
-    gameFinishedText.style('display', 'block');
+    gameFinishedText.show();
   }
 }
 
@@ -151,24 +151,24 @@ function updateNextLevelText() {
 
 function createText() {
   homeText = createP("APPUIE SUR 'S' POUR COMMENCER, 'A'/'D' POUR TE DEPLACER A DROITE/GAUCHE");
-  homeText.style('display', 'none');
+  homeText.hide();
   homeText.style('box-shadow', '10px 5px 5px red');
   homeText.position(width / 2 - 240, 100);
 
   nextLevelText = createP();
-  nextLevelText.style('display', 'none');
+  nextLevelText.hide();
   nextLevelText.style('box-shadow', '10px 5px 5px red');
   nextLevelText.position(width / 2 - 130, 80);
   updateNextLevelText();
 
   retryText = createP();
   retryText.html("APPUIE SUR 'S' POUR REPRENDRE, 'A'/'D' POUR TE DEPLACER A DROITE/GAUCHE");
-  retryText.style('display', 'none');
+  retryText.hide();
   retryText.style('box-shadow', '10px 5px 5px red');
   retryText.position(width / 2 - 240, 100);
 
   gameFinishedText = createP("Bravo d'avoir cassé tous ces p'tit murs de Berlin!!");
-  gameFinishedText.style('display', 'none');
+  gameFinishedText.hide();
   gameFinishedText.style('box-shadow', '10px 5px 5px red');
   gameFinishedText.position(width / 2 - 240, 120);
 }
