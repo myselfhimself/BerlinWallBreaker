@@ -1,15 +1,29 @@
 var board;
 var ball;
 var bricks = [];
-var gameOver = true;
-var youWin = false;
-var winText;
-var instructionText;
+
+var homeText;
+var nextLevelText;
+var retryText;
+var gameFinishedText;
+
 var drops = [];
+var GAME_LEVEL = 0;
+var GAME_LEVEL_MAX = 3;
+
+var DEFAULT_BRICKS_COUNT = 20;
+var DEFAULT_DROPS_COUNT = 20;
+
+var GAME_STATE_HOME_BANNER = 0;
+var GAME_STATE_PLAYING = 1;
+var GAME_STATE_RETRY_BANNER = 2;
+var GAME_STATE_NEXT_LEVEL_BANNER = 3;
+var GAME_STATE_FINISHED_BANNER = 4;
+var GAME_STATE = GAME_STATE_HOME_BANNER;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  bg = loadImage('assets/level1.png');
+  setupBg();
   ellipseMode(CENTER);
   textAlign(CENTER);
   noFill();
@@ -18,70 +32,89 @@ function setup() {
   board = new Board();
   ball = new Ball();
 
-  for (var i = 0; i < 100; i++) {
+  setupBricks();
+  createText();
+  homeText.style('display', 'block');
+}
+
+function setupBg() {
+  if (GAME_LEVEL) { /* TODO MORE LOGIC HERE */}
+  bg = loadImage('assets/level' + (GAME_LEVEL + 1).toString() + '.png');
+  bg = 255/(GAME_LEVEL+1); 
+}
+
+function setupDrops() {
+  if (GAME_LEVEL) { /* TODO MORE LOGIC HERE */}
+  for (var i = 0; i < DEFAULT_DROPS_COUNT; i++) {
     drops[i] = new Drop(Math.floor(random(5)));
   }
+}
 
-  createBricks(20);
-  createText();
+function setupBricks() {
+  if (GAME_LEVEL) { /* TODO MORE LOGIC HERE */}
+  if(bricks.length < DEFAULT_DROPS_COUNT) createBricks(DEFAULT_BRICKS_COUNT);
 }
 
 function draw() {
-//  background(255);
   background(bg);
-
-  // bricks
-  for (var i = bricks.length - 1; i >= 0; i--) {
-    if (ball.hits(bricks[i])) {
-      if (bricks[i].r >= 40) {
-        var newBricks = bricks[i].shrink();
-        bricks = bricks.concat(newBricks);
+  console.log("state:" + GAME_STATE.toString() + " level:" + GAME_LEVEL.toString());
+  if (GAME_STATE == GAME_STATE_HOME_BANNER) {
+    homeText.style('display', 'block');
+    board.display();
+  } else if (GAME_STATE == GAME_STATE_PLAYING) {
+    homeText.style('display', 'none');
+    retryText.style('display', 'none');
+    nextLevelText.style('display', 'none');
+    // bricks
+    for (var i = bricks.length - 1; i >= 0; i--) {
+      if (ball.hits(bricks[i])) {
+        if (bricks[i].r >= 40) {
+          var newBricks = bricks[i].shrink();
+          bricks = bricks.concat(newBricks);
+        }
+        bricks.splice(i, 1);
+        ball.direction.y *= -1;
+        break;
       }
-      bricks.splice(i, 1);
-      ball.direction.y *= -1;
-      break;
+      bricks[i].display();
     }
-    bricks[i].display();
-  }
 
-  // board
-  board.display();
-  if (!gameOver) board.checkEdges();
-  if (!gameOver) board.update();
+    // board
+    board.display();
+    board.checkEdges();
+    board.update();
 
-  // ball
-  if (ball.meets(board)) {
-    if (ball.direction.y > 0) ball.direction.y *= -1;
-  }
-  ball.display();
-  if (!gameOver) ball.checkEdges();
-  if (!gameOver) ball.update();
+    // ball
+    if (ball.meets(board)) {
+      if (ball.direction.y > 0) ball.direction.y *= -1;
+    }
+    ball.display();
+    ball.checkEdges();
+    ball.update();
 
-  if (ball.pos.y > height) {
-    ball.pos = createVector(board.pos.x + board.r, height - 500);
-    gameOver = true;
-    ball.shadows = [];
-  }
+    if (ball.pos.y > height) {
+      ball.pos = createVector(board.pos.x + board.r, height - 500);
+      GAME_STATE = GAME_STATE_RETRY_BANNER; 
+      ball.shadows = [];
+    }
 
-  if (bricks.length === 0) {
-    youWin = true;
-    gameOver = true;
-  }
-
-  if (youWin) {
-    winText.style('display', 'block');
+    if (bricks.length === 0) {
+      GAME_LEVEL++;
+      GAME_STATE = GAME_LEVEL < GAME_LEVEL_MAX ? GAME_STATE_NEXT_LEVEL_BANNER : GAME_STATE_FINISHED_BANNER;
+    }
+  } else if(GAME_STATE == GAME_STATE_RETRY_BANNER) {
+    retryText.style('display', 'block');
+  } else if(GAME_STATE == GAME_STATE_NEXT_LEVEL_BANNER) {
+    updateNextLevelText();
+    nextLevelText.style('display', 'block');  
     for (var i = 0; i < drops.length; i++) {
       drops[i].fall();
       drops[i].show();
     }
-  } else {
-    winText.style('display', 'none');
-  }
-
-  if (gameOver) {
-    instructionText.style('display', 'block');
-  } else {
-    instructionText.style('display', 'none');
+    setupBricks();
+ 
+  } else if(GAME_STATE == GAME_STATE_FINISHED_BANNER) {
+    gameFinishedText.style('display', 'block');
   }
 }
 
@@ -96,9 +129,13 @@ function keyPressed() {
   } else if (key === 'd' || key === 'D') {
     board.isMovingRight = true;
   } else if (key === 's' || key === 'S') {
-    if (bricks.length === 0) createBricks(20);
-    gameOver = false;
-    youWin = false;
+    if (GAME_STATE == GAME_STATE_HOME_BANNER || GAME_STATE == GAME_STATE_RETRY_BANNER || GAME_STATE == GAME_STATE_NEXT_LEVEL_BANNER) {
+      GAME_STATE = GAME_STATE_PLAYING;
+    }
+  }
+	// TODO REMOVE HACK
+else if (key == 'j') {
+    bricks.pop(); 
   }
 }
 
@@ -108,12 +145,30 @@ function createBricks(n) {
   }
 }
 
-function createText() {
-  winText = createP('🎉🎉🎉 YOU WIN! 🎉🎉🎉');
-  winText.style('display', 'none');
-  winText.position(width / 2 - 130, 80);
+function updateNextLevelText() {
+  nextLevelText.html("🎉🎉🎉 TRES BIEN! APPUIE SUR 'S' POUR PASSER AU NIVEAU " + (GAME_LEVEL+1).toString() + ' 🎉🎉🎉');
+}
 
-  instructionText = createP("Press 'S' to Start, 'A'/'D' to move Right/Left");
-  instructionText.style('display', 'none');
-  instructionText.position(width / 2 - 240, 100);
+function createText() {
+  homeText = createP("APPUIE SUR 'S' POUR COMMENCER, 'A'/'D' POUR TE DEPLACER A DROITE/GAUCHE");
+  homeText.style('display', 'none');
+  homeText.style('box-shadow', '10px 5px 5px red');
+  homeText.position(width / 2 - 240, 100);
+
+  nextLevelText = createP();
+  nextLevelText.style('display', 'none');
+  nextLevelText.style('box-shadow', '10px 5px 5px red');
+  nextLevelText.position(width / 2 - 130, 80);
+  updateNextLevelText();
+
+  retryText = createP();
+  retryText.html("APPUIE SUR 'S' POUR REPRENDRE, 'A'/'D' POUR TE DEPLACER A DROITE/GAUCHE");
+  retryText.style('display', 'none');
+  retryText.style('box-shadow', '10px 5px 5px red');
+  retryText.position(width / 2 - 240, 100);
+
+  gameFinishedText = createP("Bravo d'avoir cassé tous ces p'tit murs de Berlin!!");
+  gameFinishedText.style('display', 'none');
+  gameFinishedText.style('box-shadow', '10px 5px 5px red');
+  gameFinishedText.position(width / 2 - 240, 120);
 }
