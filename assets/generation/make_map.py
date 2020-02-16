@@ -38,8 +38,8 @@ effectC = "_fx_stylize starrynight +fx_stylize 1,6,0,0,0.5,2,3,0.5,0.1,3,3,0,0.7
 effectD = "fx_engrave 0.5,50,0,8,40,0,0,0,10,1,0,0,0,1,0"
 effectE = "fx_freaky_bw 90,20,0,0,0,0"
 levels = []
-levels.append(['level1', ['Praha, Cesko', 'Brno, Cesko'], effectA])
-levels.append(['level2', ['Praha, Cesko', 'Riviere du Loup, Quebec, Canada'], effectB])
+levels.append(['level1', ['Praha, Cesko', 'Brno, Cesko'], effectE])
+levels.append(['level2', ['Praha, Cesko', 'Riviere du Loup, Quebec, Canada'], effectE])
 levels.append(['level3', ['Caen, France', 'Le Havre, France'], effectE])
 
 result_filenames = "" 

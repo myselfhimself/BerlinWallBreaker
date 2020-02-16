@@ -101,6 +101,7 @@ function draw() {
     if (bricks.length === 0) {
       GAME_LEVEL++;
       GAME_STATE = GAME_LEVEL < GAME_LEVEL_MAX ? GAME_STATE_NEXT_LEVEL_BANNER : GAME_STATE_FINISHED_BANNER;
+      setupBg();
     }
   } else if(GAME_STATE == GAME_STATE_RETRY_BANNER) {
     retryText.show();
