@@ -1,0 +1,10 @@
+certifi==2019.11.28
+chardet==3.0.4
+geographiclib==1.50
+geopy==1.21.0
+gmic==2.8.4
+idna==2.8
+Pillow==7.0.0
+requests==2.22.0
+staticmap==0.5.4
+urllib3==1.25.8
