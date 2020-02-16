@@ -17,8 +17,8 @@ def make_map(filename_without_ext, addresses, gmic_effect="fx_freaky_bw 90,20,0,
         print(loc)
     
     image = m.render()
-    output_filename1 = filename_without_ext + ".png"
-    output_filename2 = filename_without_ext + "_artistic.png"
+    output_filename1 = filename_without_ext + "_original.png"
+    output_filename2 = filename_without_ext + ".png"
     image.save(output_filename1)
     print(output_filename1)
     if not no_display:
