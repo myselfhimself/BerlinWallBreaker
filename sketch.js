@@ -40,7 +40,7 @@ function setup() {
 function setupBg() {
   if (GAME_LEVEL) { /* TODO MORE LOGIC HERE */}
   bg = loadImage('assets/level' + (GAME_LEVEL + 1).toString() + '.png');
-  bg = 255/(GAME_LEVEL+1); 
+  //bg = 255/(GAME_LEVEL+1); 
 }
 
 function setupDrops() {
