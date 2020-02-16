@@ -21,6 +21,21 @@ var GAME_STATE_NEXT_LEVEL_BANNER = 3;
 var GAME_STATE_FINISHED_BANNER = 4;
 var GAME_STATE = GAME_STATE_HOME_BANNER;
 
+var soundHit;
+
+function preload() {
+	// http://soundbible.com/2044-Tick.html
+	// http://soundbible.com/2039-Tree-Fall-Small.html
+	// http://soundbible.com/1705-Click2.html
+	// https://github.com/processing/p5.js-sound/blob/master/examples/learningProcessingExamples/01b_preloadSound_playback/sketch.js
+  soundHit = loadSound('assets/Tick-DeepFrozenApps-397275646.mp3');
+  soundHit2 = loadSound('assets/Click2-Sebastian-759472264.mp3');
+  soundBoardHit = loadSound('assets/zapsplat_bell_service_disk_ring_slightly_broken_resonate_18042.mp3');
+  soundSideHit = loadSound('assets/service-bell_daniel_simion.mp3');
+  soundtrack = loadSound('assets/AccaPecca.mp3');
+  soundLevelChange = loadSound('assets/Tree_Fall_Small-Daniel_Simion-1639156552.mp3');
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   setupBg();
@@ -35,6 +50,9 @@ function setup() {
   setupBricks();
   createText();
   homeText.show();
+
+  // loop sound
+  soundtrack.loop();
 }
 
 function setupBg() {
@@ -55,6 +73,27 @@ function setupBricks() {
   if(bricks.length < DEFAULT_DROPS_COUNT) createBricks(DEFAULT_BRICKS_COUNT);
 }
 
+function playSoundHit() {
+  // Randomly play hit sound
+  if(random(50) % 2 == 0) {
+    soundHit.play();
+  } else {
+    soundHit2.play();
+  }
+}
+
+function playSoundSideHit() {
+  soundSideHit.play();
+}
+
+function playSoundLevelChange() {
+  soundLevelChange.play();
+}
+
+function playSoundBoardHit() {
+  soundBoardHit.play();
+}
+
 function draw() {
   background(bg);
   console.log("state:" + GAME_STATE.toString() + " level:" + GAME_LEVEL.toString());
@@ -68,6 +107,7 @@ function draw() {
     // bricks
     for (var i = bricks.length - 1; i >= 0; i--) {
       if (ball.hits(bricks[i])) {
+	playSoundHit();
         if (bricks[i].r >= 40) {
           var newBricks = bricks[i].shrink();
           bricks = bricks.concat(newBricks);
@@ -86,6 +126,7 @@ function draw() {
 
     // ball
     if (ball.meets(board)) {
+      playSoundBoardHit();
       if (ball.direction.y > 0) ball.direction.y *= -1;
     }
     ball.display();
@@ -102,6 +143,7 @@ function draw() {
       GAME_LEVEL++;
       GAME_STATE = GAME_LEVEL < GAME_LEVEL_MAX ? GAME_STATE_NEXT_LEVEL_BANNER : GAME_STATE_FINISHED_BANNER;
       setupBg();
+      playSoundLevelChange();
     }
   } else if(GAME_STATE == GAME_STATE_RETRY_BANNER) {
     retryText.show();

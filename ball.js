@@ -45,11 +45,17 @@ function Ball(pos) {
   this.checkEdges = function() {
     if (this.pos.x > width - this.r && this.direction.x > 0) {
       this.direction.x *= -1;
+      playSoundSideHit();
     }
     if (this.pos.x < this.r && this.direction.x < 0) {
       this.direction.x *= -1;
+      playSoundSideHit();
     }
-    if (this.pos.y < this.r && ball.direction.y < 0) this.direction.y *= -1;
+    if (this.pos.y < this.r && ball.direction.y < 0) {
+      this.direction.y *= -1;
+      playSoundSideHit();
+    }
+
   }
 
   this.meets = function(board) {
