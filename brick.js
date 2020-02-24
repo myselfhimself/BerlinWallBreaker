@@ -8,11 +8,11 @@ function Brick(pos, r) {
 	    random(
 		    min(first.x, second.x),
 		    max(first.x, second.x)
-	    ),
+	    )*width,
 	    random(
 		    min(first.y, second.y),
 		    max(first.y, second.y)
-	    )
+	    )*height
     );
     //this.pos = createVector(random(100, width - 100), random(100, height - 400));
   }

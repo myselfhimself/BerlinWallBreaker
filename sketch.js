@@ -11,11 +11,13 @@ var gameFinishedText;
 var drops = [];
 var GAME_LEVEL = 0;
 var GAME_LEVEL_MAX = 3;
+var measurementWidth = 1370;
+var measurementHeight = 762;
 var GAME_LEVEL_POLES =
 	[
-		{first: {x: 330, y: 231}, second: {x: 1012, y: 545}}, // Praha Brno
-		{first: {x: 265, y: 413}, second: {x: 1086, y: 379}}, // Praha Riviere du Loup
-		{first: {x: 379, y: 617}, second: {x: 974, y: 187}}, // Caen Le Havre
+		{first: {x: 330/measurementWidth, y: 231/measurementHeight}, second: {x: 1012/measurementWidth, y: 545/measurementHeight}}, // Praha Brno
+		{first: {x: 265/measurementWidth, y: 413/measurementHeight}, second: {x: 1086/measurementWidth, y: 379/measurementHeight}}, // Praha Riviere du Loup
+		{first: {x: 379/measurementWidth, y: 617/measurementHeight}, second: {x:  974/measurementWidth, y: 187/measurementHeight}}, // Caen Le Havre
 	];
 var GAME_LEVEL_BRICK_IMAGES =
 	[
@@ -110,7 +112,7 @@ function playSoundBoardHit() {
 }
 
 function mouseClicked() {
-  console.log(mouseX, mouseY);
+  console.log(mouseX/width, mouseY/height);
 }
 
 function draw() {
