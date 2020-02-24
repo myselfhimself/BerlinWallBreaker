@@ -1,3 +1,4 @@
+var __DEBUGGING = false;
 var board;
 var ball;
 var bricks = [];
@@ -175,9 +176,7 @@ function keyPressed() {
     if (GAME_STATE == GAME_STATE_HOME_BANNER || GAME_STATE == GAME_STATE_RETRY_BANNER || GAME_STATE == GAME_STATE_NEXT_LEVEL_BANNER) {
       GAME_STATE = GAME_STATE_PLAYING;
     }
-  }
-	// TODO REMOVE HACK
-else if (key == 'j') {
+  } else if (key == 'j' && __DEBUGGING) {
     bricks.pop(); 
   }
 }
