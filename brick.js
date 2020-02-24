@@ -18,9 +18,11 @@ function Brick(pos, r) {
 
   this.display = function() {
     push();
-    stroke(this.colors[this.index]);
+    var brick_color = this.colors[this.index];
+    stroke(brick_color);
     strokeWeight(2);
     translate(this.pos.x, this.pos.y);
+    fill(brick_color);
     beginShape();
     for (var i = 0; i < this.total; i++) {
       var angle = map(i, 0, this.total, 0, TWO_PI);

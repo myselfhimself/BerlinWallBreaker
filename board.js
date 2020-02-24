@@ -8,6 +8,7 @@ function Board() {
   this.display = function() {
     strokeWeight(2);
     stroke('#9A8DF2');
+    fill(255);
     rect(this.pos.x, this.pos.y, this.r, this.h);
     for (var i = 0; i < this.r; i += this.h) {
       line(this.pos.x + i, this.pos.y, this.pos.x + this.h + i, this.pos.y + this.h);
