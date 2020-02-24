@@ -1,4 +1,4 @@
-var __DEBUGGING = false;
+var GAME_DEBUGGING = true;
 var board;
 var ball;
 var bricks = [];
@@ -11,6 +11,20 @@ var gameFinishedText;
 var drops = [];
 var GAME_LEVEL = 0;
 var GAME_LEVEL_MAX = 3;
+var GAME_LEVEL_POLES =
+	[
+		{first: {x: 330, y: 231}, second: {x: 1012, y: 545}}, // Praha Brno
+		{first: {x: 265, y: 413}, second: {x: 1086, y: 379}}, // Praha Riviere du Loup
+		{first: {x: 379, y: 617}, second: {x: 974, y: 187}}, // Caen Le Havre
+	];
+var GAME_LEVEL_BRICK_IMAGES =
+	[
+		/* @pjs preload="assets/cloud.png"; */
+		/* @pjs preload="assets/goulash.png"; */
+		["assets/cloud.png", "assets/goulash.png"],
+		["assets/cloud.png"],
+		["assets/cloud.png"],
+	];
 
 var DEFAULT_BRICKS_COUNT = 20;
 var DEFAULT_DROPS_COUNT = 20;
@@ -95,9 +109,16 @@ function playSoundBoardHit() {
   soundBoardHit.play();
 }
 
+function mouseClicked() {
+  console.log(mouseX, mouseY);
+}
+
 function draw() {
+
   background(bg);
-  console.log("state:" + GAME_STATE.toString() + " level:" + GAME_LEVEL.toString());
+  if (GAME_DEBUGGING) {
+    console.log("state:" + GAME_STATE.toString() + " level:" + GAME_LEVEL.toString());
+  }
   if (GAME_STATE == GAME_STATE_HOME_BANNER) {
     homeText.show();
     board.display();
@@ -176,7 +197,7 @@ function keyPressed() {
     if (GAME_STATE == GAME_STATE_HOME_BANNER || GAME_STATE == GAME_STATE_RETRY_BANNER || GAME_STATE == GAME_STATE_NEXT_LEVEL_BANNER) {
       GAME_STATE = GAME_STATE_PLAYING;
     }
-  } else if (key == 'j' && __DEBUGGING) {
+  } else if (key == 'j' && GAME_DEBUGGING) {
     bricks.pop(); 
   }
 }
