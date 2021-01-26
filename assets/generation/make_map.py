@@ -5,7 +5,7 @@ from staticmap import StaticMap, IconMarker
 import gmic
 from geopy import Nominatim
 
-def make_map(filename_without_ext, addresses, gmic_effect="fx_freaky_bw 90,20,0,0,0,0", no_display=False):
+def make_map(filename_without_ext, addresses, gmic_effect="fx_freaky_bw 90,20,0,0,0,0", no_display=False, prefix="LETTER"):
     m = StaticMap(800, 600, 80)
     g = gmic.Gmic("update")
     locator = Nominatim(user_agent="BerlinWallBreaker Agent")
@@ -17,8 +17,8 @@ def make_map(filename_without_ext, addresses, gmic_effect="fx_freaky_bw 90,20,0,
         print(loc)
     
     image = m.render()
-    output_filename1 = filename_without_ext + "_original.png"
-    output_filename2 = filename_without_ext + ".png"
+    output_filename1 = prefix + filename_without_ext + "_original.png"
+    output_filename2 = prefix + filename_without_ext + ".png"
     image.save(output_filename1)
     print(output_filename1)
     if not no_display:
@@ -38,9 +38,9 @@ effectC = "_fx_stylize starrynight +fx_stylize 1,6,0,0,0.5,2,3,0.5,0.1,3,3,0,0.7
 effectD = "fx_engrave 0.5,50,0,8,40,0,0,0,10,1,0,0,0,1,0"
 effectE = "fx_freaky_bw 90,20,0,0,0,0"
 levels = []
-levels.append(['level1', ['Praha, Cesko', 'Brno, Cesko'], effectE])
-levels.append(['level2', ['Praha, Cesko', 'Riviere du Loup, Quebec, Canada'], effectE])
-levels.append(['level3', ['Caen, France', 'Le Havre, France'], effectE])
+levels.append(['praha', ['karlovo namesti praha', 'vladislavova 11 praha', 'pivovar narodni praha', 'letna park praha', 'microsoft praha', 'waldstein garden, prague'], effectE])
+# levels.append(['level2', ['Praha, Cesko', 'Riviere du Loup, Quebec, Canada'], effectE])
+# levels.append(['level3', ['Caen, France', 'Le Havre, France'], effectE])
 
 result_filenames = "" 
 for a in levels:
