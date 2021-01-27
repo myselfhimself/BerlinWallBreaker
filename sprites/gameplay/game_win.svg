@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="game_win.svg"
+   inkscape:version="1.0 (1.0+r73+1)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 200 112.5"
+   height="112.5mm"
+   width="200mm">
+  <defs
+     id="defs2">
+    <inkscape:perspective
+       id="perspective947"
+       inkscape:persp3d-origin="91.488281 : 43.135829 : 1"
+       inkscape:vp_z="166.8933 : 57.274271 : 1"
+       inkscape:vp_y="0 : 754.05026 : 0"
+       inkscape:vp_x="16.083254 : 57.274271 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <rect
+       id="rect853"
+       height="21.947705"
+       width="115.73209"
+       y="14.795319"
+       x="48.249384" />
+    <rect
+       x="48.249386"
+       y="14.795319"
+       width="121.46755"
+       height="106.47474"
+       id="rect853-3" />
+    <rect
+       x="48.249386"
+       y="14.795319"
+       width="121.46755"
+       height="106.47474"
+       id="rect866" />
+    <rect
+       x="48.249386"
+       y="14.795319"
+       width="121.46755"
+       height="106.47474"
+       id="rect853-7" />
+    <rect
+       x="48.249386"
+       y="14.795319"
+       width="121.46755"
+       height="106.47474"
+       id="rect911" />
+    <filter
+       id="filter1057"
+       inkscape:label="Paper Bump"
+       inkscape:menu="Bumps"
+       inkscape:menu-tooltip="Paper like emboss effect"
+       style="color-interpolation-filters:sRGB;">
+      <feTurbulence
+         id="feTurbulence1039"
+         type="fractalNoise"
+         numOctaves="5"
+         baseFrequency="1"
+         seed="0"
+         result="result0" />
+      <feConvolveMatrix
+         id="feConvolveMatrix1041"
+         targetY="2"
+         targetX="2"
+         kernelMatrix="-2 0 0 0 -2 0 -2 0 -2 0 0 0 -10 0 0 0 -2 0 -2 0 -2 0 0 0 -2 "
+         order="5 5"
+         result="result5" />
+      <feComposite
+         id="feComposite1043"
+         in2="SourceGraphic"
+         in="result5"
+         operator="arithmetic"
+         k1="1.5"
+         k2="0.5"
+         k3="0.5"
+         result="result2" />
+      <feColorMatrix
+         id="feColorMatrix1045"
+         result="result2"
+         type="luminanceToAlpha"
+         in="result2" />
+      <feDiffuseLighting
+         id="feDiffuseLighting1049"
+         diffuseConstant="0.6"
+         result="result1"
+         surfaceScale="5">
+        <feDistantLight
+           id="feDistantLight1047"
+           azimuth="225"
+           elevation="35" />
+      </feDiffuseLighting>
+      <feComposite
+         id="feComposite1051"
+         in2="SourceGraphic"
+         result="result3"
+         k3="0.5"
+         k1="1.5"
+         in="result1"
+         operator="arithmetic" />
+      <feBlend
+         id="feBlend1053"
+         in2="result1"
+         result="result6"
+         mode="normal"
+         in="result3" />
+      <feComposite
+         id="feComposite1055"
+         in2="SourceGraphic"
+         operator="in" />
+    </filter>
+    <filter
+       id="filter1173"
+       inkscape:label="Greyscale"
+       style="color-interpolation-filters:sRGB;">
+      <feColorMatrix
+         result="fbSourceGraphic"
+         id="feColorMatrix1171"
+         values="0.21 0.72 0.072 -0.16 0 0.21 0.72 0.072 -0.16 0 0.21 0.72 0.072 -0.16 0 0 0 0 1 0 " />
+      <feColorMatrix
+         id="feColorMatrix1175"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         values="0.21 0.72 0.072 -0.16 0 0.21 0.72 0.072 -0.16 0 0.21 0.72 0.072 -0.16 0 0 0 0 1 0 "
+         id="feColorMatrix1177" />
+    </filter>
+    <filter
+       id="filter1199"
+       inkscape:menu="Protrusions"
+       inkscape:menu-tooltip="Inky splotches underneath the object"
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Greyscale">
+      <feColorMatrix
+         id="feColorMatrix1181"
+         in="SourceGraphic"
+         type="luminanceToAlpha"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="feColorMatrix1183"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 "
+         result="result6" />
+      <feComposite
+         id="feComposite1185"
+         k3="0"
+         k1="1"
+         k2="0"
+         in="SourceGraphic"
+         operator="out"
+         result="result2"
+         in2="result6" />
+      <feTurbulence
+         id="feTurbulence1187"
+         numOctaves="5"
+         baseFrequency="0.04"
+         type="fractalNoise" />
+      <feColorMatrix
+         id="feColorMatrix1189"
+         result="result0"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 -1.5 0 0 4.5 -1 " />
+      <feComposite
+         id="feComposite1191"
+         operator="out"
+         result="result4"
+         in="result0"
+         in2="result0" />
+      <feColorMatrix
+         id="feColorMatrix1193"
+         result="result7"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 5 -1 " />
+      <feComposite
+         id="feComposite1195"
+         k3="1"
+         k1="1.5"
+         result="result5"
+         operator="arithmetic"
+         in2="result2" />
+      <feComposite
+         id="feComposite1197"
+         result="fbSourceGraphic"
+         in="result5"
+         operator="in"
+         in2="SourceGraphic" />
+      <feColorMatrix
+         id="feColorMatrix1239"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feGaussianBlur
+         stdDeviation="1.3"
+         in="fbSourceGraphic"
+         result="result1"
+         id="feGaussianBlur1241" />
+      <feTurbulence
+         baseFrequency="0.034"
+         numOctaves="4"
+         result="result0"
+         id="feTurbulence1243" />
+      <feDisplacementMap
+         in="result1"
+         xChannelSelector="R"
+         yChannelSelector="G"
+         scale="19.6"
+         result="result2"
+         id="feDisplacementMap1245"
+         in2="result0" />
+      <feColorMatrix
+         result="result3"
+         values="2 0 0 0 0 0 2 0 0 0 0 0 2 0 0 0 0 0 0.7 0"
+         id="feColorMatrix1247" />
+      <feGaussianBlur
+         stdDeviation="1.1"
+         in="fbSourceGraphic"
+         result="result4"
+         id="feGaussianBlur1249" />
+      <feComposite
+         result="fbSourceGraphic"
+         in="result4"
+         id="feComposite1251"
+         in2="result3" />
+      <feColorMatrix
+         id="feColorMatrix1253"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         result="fbSourceGraphic"
+         in="fbSourceGraphic"
+         values="0.21 0.72 0.072 -0.16 0 0.21 0.72 0.072 -0.16 0 0.21 0.72 0.072 -0.16 0 0 0 0 1 0 "
+         id="feColorMatrix1255" />
+      <feColorMatrix
+         id="feColorMatrix1269"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         result="fbSourceGraphic"
+         in="fbSourceGraphic"
+         values="0.21 0.72 0.072 -0.16 0 0.21 0.72 0.072 -0.16 0 0.21 0.72 0.072 -0.16 0 0 0 0 1 0 "
+         id="feColorMatrix1271" />
+      <feColorMatrix
+         id="feColorMatrix1273"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         result="fbSourceGraphic"
+         in="fbSourceGraphic"
+         values="0.21 0.72 0.072 -0.16 0 0.21 0.72 0.072 -0.16 0 0.21 0.72 0.072 -0.16 0 0 0 0 1 0 "
+         id="feColorMatrix1275" />
+      <feColorMatrix
+         id="feColorMatrix1277"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         in="fbSourceGraphic"
+         result="fbSourceGraphicAlpha" />
+      <feColorMatrix
+         in="fbSourceGraphic"
+         values="0.21 0.72 0.072 -0.16 0 0.21 0.72 0.072 -0.16 0 0.21 0.72 0.072 -0.16 0 0 0 0 1 0 "
+         id="feColorMatrix1279" />
+    </filter>
+    <rect
+       id="rect3493"
+       height="106.47474"
+       width="121.46755"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       x="48.249384"
+       y="14.795319"
+       width="115.73209"
+       height="21.947705"
+       id="rect3499" />
+    <rect
+       id="rect3505"
+       height="106.47474"
+       width="121.46755"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       x="48.249386"
+       y="14.795319"
+       width="121.46755"
+       height="106.47474"
+       id="rect3511" />
+    <rect
+       id="rect3517"
+       height="106.47474"
+       width="121.46755"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       x="48.249386"
+       y="14.795319"
+       width="166.74881"
+       height="11.835034"
+       id="rect3523" />
+    <rect
+       x="48.249386"
+       y="14.795319"
+       width="173.4348"
+       height="11.763305"
+       id="rect3560" />
+    <rect
+       id="rect3499-7"
+       height="21.947704"
+       width="115.73209"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       id="rect3571"
+       height="21.947704"
+       width="115.73209"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       id="rect3499-2"
+       height="21.947704"
+       width="115.73209"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       id="rect3571-8"
+       height="21.947704"
+       width="115.73209"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       id="rect3499-8"
+       height="21.947704"
+       width="115.73209"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       id="rect3571-6"
+       height="21.947704"
+       width="115.73209"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       id="rect3499-9"
+       height="21.947704"
+       width="115.73209"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       id="rect3571-7"
+       height="21.947704"
+       width="115.73209"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       id="rect3499-93"
+       height="21.947704"
+       width="115.73209"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       id="rect3571-71"
+       height="21.947704"
+       width="115.73209"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       id="rect3499-3"
+       height="21.947704"
+       width="115.73209"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       id="rect3571-5"
+       height="21.947704"
+       width="115.73209"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       id="rect3499-0"
+       height="21.947704"
+       width="115.73209"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       id="rect3571-2"
+       height="21.947704"
+       width="115.73209"
+       y="14.795319"
+       x="48.249386" />
+    <rect
+       x="48.249386"
+       y="14.795319"
+       width="115.73209"
+       height="21.947704"
+       id="rect3693" />
+    <rect
+       x="48.249386"
+       y="14.795319"
+       width="121.46755"
+       height="106.47474"
+       id="rect3701" />
+    <rect
+       id="rect3709"
+       height="106.47474"
+       width="121.46755"
+       y="14.795319"
+       x="48.249386" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-maximized="1"
+     inkscape:window-y="27"
+     inkscape:window-x="70"
+     inkscape:window-height="836"
+     inkscape:window-width="1370"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="305.3937"
+     inkscape:cx="408.32033"
+     inkscape:zoom="0.7"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <text
+       y="0"
+       x="40.827324"
+       transform="matrix(3.0930561,0,0,3.0930561,-228.38442,-43.268168)"
+       style="font-style:normal;font-weight:normal;font-size:25.4px;line-height:0.35;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect853);fill:#000000;fill-opacity:1;stroke:none;"
+       id="text851"
+       xml:space="preserve"><tspan
+         x="96.591211"
+         y="25.837969"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:'BLionTale, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle">YOU
+</tspan></tspan><tspan
+         x="95.05332"
+         y="36.246015"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:'BLionTale, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle">WIN!</tspan></tspan></text>
+    <rect
+       style="fill:#000000;stroke:none;stroke-width:0.43875;stop-color:#000000"
+       id="rect3487"
+       width="71.594872"
+       height="25.44087"
+       x="3.5632336"
+       y="84.343094"
+       ry="7.7249017" />
+    <text
+       transform="matrix(1.1280952,0,0,1.1280952,-46.10615,68.658675)"
+       style="font-style:normal;font-weight:normal;font-size:25.4px;line-height:0.35;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3493);fill:#000000;fill-opacity:1;stroke:none;"
+       id="text3491"
+       xml:space="preserve"><tspan
+         x="48.25"
+         y="25.837969"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:BLionTale;fill:#ffffff">JE MANGE
+</tspan></tspan><tspan
+         x="48.25"
+         y="36.246015"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:BLionTale;fill:#ffffff">DU BRICK</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       id="text3497"
+       style="font-style:normal;font-weight:normal;font-size:25.4px;line-height:0.35;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3499);fill:#cccccc;fill-opacity:1;stroke:none;"
+       transform="matrix(1.111707,-0.52752286,0.69723423,0.84111027,26.6583,71.828421)"
+       x="19.880659"
+       y="0"><tspan
+         x="103.06523"
+         y="25.837969"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:'BLionTale, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#cccccc">*</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       id="text3558"
+       style="font-style:normal;font-weight:normal;font-size:25.4px;line-height:0.35;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3560);fill:#000000;fill-opacity:1;stroke:none;"
+       transform="matrix(1.1280952,0,0,1.1280952,-52.985318,53.841999)"><tspan
+         x="48.25"
+         y="25.837969"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:BLionTale;fill:#000000">QUELLE EST VOTRE SECRET ?</tspan></tspan></text>
+    <text
+       y="0"
+       x="19.880659"
+       transform="matrix(-0.02925714,-1.3094066,1.3094066,-0.02925714,10.620731,166.23348)"
+       style="font-style:normal;font-weight:normal;font-size:25.4px;line-height:0.35;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3499-7);fill:#4d4d4d;fill-opacity:1;stroke:none;"
+       id="text3497-3"
+       xml:space="preserve"><tspan
+         x="103.06523"
+         y="25.837969"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:'BLionTale, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#4d4d4d">*</tspan></tspan></text>
+    <text
+       y="0"
+       x="19.880659"
+       transform="matrix(1.0737877,0.58610982,-0.58610982,1.0737877,-54.197999,-28.273112)"
+       style="font-style:normal;font-weight:normal;font-size:25.4px;line-height:0.35;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3499-2);fill:#cccccc;fill-opacity:1;stroke:none;"
+       id="text3497-30"
+       xml:space="preserve"><tspan
+         x="103.06523"
+         y="25.837969"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:'BLionTale, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#cccccc">*</tspan></tspan></text>
+    <text
+       y="0"
+       x="19.880659"
+       transform="matrix(2.8565326,1.036232,0.19483014,2.4835374,-139.30407,-113.83282)"
+       style="font-style:normal;font-weight:normal;font-size:25.4px;line-height:0.35;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3499-8);fill:#333333;fill-opacity:1;stroke:none;"
+       id="text3497-6"
+       xml:space="preserve"><tspan
+         x="103.06523"
+         y="25.837969"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:'BLionTale, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#333333">*</tspan></tspan></text>
+    <text
+       y="0"
+       x="19.880659"
+       transform="matrix(0.32925791,-1.178191,1.178191,0.32925791,114.90317,131.87118)"
+       style="font-style:normal;font-weight:normal;font-size:25.4px;line-height:0.35;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3499-9);fill:#666666;fill-opacity:1;stroke:none;"
+       id="text3497-1"
+       xml:space="preserve"><tspan
+         x="103.06523"
+         y="25.837969"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:'BLionTale, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#666666">*</tspan></tspan></text>
+    <text
+       y="0"
+       x="19.880659"
+       transform="matrix(1.1871207,0.29544733,-0.29544733,1.1871207,-71.407343,-39.65386)"
+       style="font-style:normal;font-weight:normal;font-size:25.4px;line-height:0.35;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3499-93);fill:#999999;fill-opacity:1;stroke:none;"
+       id="text3497-2"
+       xml:space="preserve"><tspan
+         x="103.06523"
+         y="25.837969"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:'BLionTale, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#999999">*</tspan></tspan></text>
+    <text
+       y="0"
+       x="19.880659"
+       transform="matrix(0.14978037,-1.9577735,2.2593355,0.12978862,-48.108388,260.46597)"
+       style="font-style:normal;font-weight:normal;font-size:25.4px;line-height:0.35;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3499-3);fill:#000000;fill-opacity:1;stroke:none;"
+       id="text3497-7"
+       xml:space="preserve"><tspan
+         x="103.06523"
+         y="25.837969"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:'BLionTale, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle">*</tspan></tspan></text>
+    <text
+       y="0"
+       x="19.880659"
+       transform="matrix(0.04425611,-1.2225327,1.2225327,0.04425611,-14.354158,138.85458)"
+       style="font-style:normal;font-weight:normal;font-size:25.4px;line-height:0.35;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3499-0);fill:#000000;fill-opacity:1;stroke:none;"
+       id="text3497-60"
+       xml:space="preserve"><tspan
+         x="103.06523"
+         y="25.837969"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:'BLionTale, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle">*</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       id="text3691"
+       style="font-style:normal;font-weight:normal;font-size:25.4px;line-height:0.35;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3693);fill:#000000;fill-opacity:1;stroke:none;"
+       transform="matrix(0.56288503,1.0861028,-0.61991385,0.78834254,95.200272,-111.27891)"
+       x="19.880659"
+       y="0"><tspan
+         x="103.06523"
+         y="25.837969"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:'BLionTale, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#000000">*</tspan></tspan></text>
+    <rect
+       ry="7.7249017"
+       y="84.343094"
+       x="82.938232"
+       height="25.44087"
+       width="71.594872"
+       id="rect3695"
+       style="fill:#000000;stroke:none;stroke-width:0.43875;stop-color:#000000" />
+    <text
+       xml:space="preserve"
+       id="text3699"
+       style="font-style:normal;font-weight:normal;font-size:25.4px;line-height:0.35;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3701);fill:#000000;fill-opacity:1;stroke:none;"
+       transform="matrix(1.1280952,0,0,1.1280952,33.268853,68.658675)"><tspan
+         x="48.25"
+         y="25.837969"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:BLionTale;fill:#ffffff">JE SUIS
+</tspan></tspan><tspan
+         x="48.25"
+         y="36.246015"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:BLionTale;fill:#ffffff">DE BERLIN</tspan></tspan></text>
+    <rect
+       style="fill:#000000;stroke:none;stroke-width:0.323123;stop-color:#000000"
+       id="rect3703"
+       width="38.831459"
+       height="25.44087"
+       x="157.02158"
+       y="84.343094"
+       ry="7.7249017" />
+    <text
+       transform="matrix(1.1280952,0,0,1.1280952,107.35219,68.658675)"
+       style="font-style:normal;font-weight:normal;font-size:25.4px;line-height:0.35;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3709);fill:#000000;fill-opacity:1;stroke:none;"
+       id="text3707"
+       xml:space="preserve"><tspan
+         x="48.25"
+         y="25.837969"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:BLionTale;fill:#ffffff">AU-
+</tspan></tspan><tspan
+         x="48.25"
+         y="36.246015"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:BLionTale;-inkscape-font-specification:BLionTale;fill:#ffffff">-TRE</tspan></tspan></text>
+  </g>
+</svg>
