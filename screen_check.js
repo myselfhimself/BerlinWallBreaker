@@ -1,5 +1,5 @@
 var REDIRECTING=false;
-var nextUrl = 'index_comingsoon2.html';
+var nextUrl = 'comingsoon.html';
 var b;
 function setup() {
 	createCanvas(windowWidth, windowHeight);
