@@ -53,17 +53,18 @@ function draw() {
 	push();
 	origX=-30;origY=0; orbit_radius=100;a=0; orbitSpeed=0.1;
         translate(origX+orbit_radius*sin(frameCount*orbitSpeed+a*10),origY+orbit_radius*cos(frameCount*orbitSpeed+a*10),0);
+
         sphere(14,10,10);
 	pop();
 
+	push();
 	translate(0,0,100);
 	scale(2);
+        pointLight(0,0,250,origX+20+orbit_radius*sin(frameCount*orbitSpeed+a*10),origY+orbit_radius*cos(frameCount*orbitSpeed+a*10),100);
+        pointLight(0,250,0,origX+20+orbit_radius*sin(frameCount*orbitSpeed+a*10+90),origY+orbit_radius*cos(frameCount*orbitSpeed+a*10+90),100);
+        pointLight(250,0,0,origX+20+orbit_radius*sin(frameCount*orbitSpeed+a*10+180),origY+orbit_radius*cos(frameCount*orbitSpeed+a*10+180),100);
+	specularMaterial(250);
 	model(game_postponed);
 	lights();
-}
-
-function touchStarted() {
-  //lastMouseX = mouseX;
-  //lastMouseY = mouseY;
-  lastMouseFrameCount=frameCount;
+	pop();
 }
