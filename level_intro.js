@@ -8,8 +8,35 @@ if(LEVEL_ID == undefined || LEVEL_ID.indexOf('#level') != 0 || LEVEL_ID.length !
 } else {
   LEVEL_ID = parseInt(LEVEL_ID.substr('#level'.length, 1));
 }
-LEVEL_TEXT = {1:["LEVEL1", "CAEN"], 2:["LEVEL2", "LEHAVRE"], 3:["LEVEL3", "MONDE"]};
-console.log(LEVEL_TEXT[LEVEL_ID]);
+var whiteColor = function(){return color(255,255,255);};
+LEVELS_DATA = {
+	0:
+	{
+	colorFunc: function(){return color(random(255), random(255), random(255));},
+	text: ["GAME", "OVER"],
+        paddingLeftDivider: 2,
+	nextUrl: "home.html",
+	},
+	1:{
+	colorFunc: whiteColor,
+	text: ["LEVEL1", "CAEN"],
+        paddingLeftDivider: 5,
+	nextUrl: "level1.html",
+	},
+	2:{
+	colorFunc: whiteColor,
+	text: ["LEVEL2", "LEHAVRE"],
+        paddingLeftDivider: 5,
+	nextUrl: "level2.html",
+	},
+	3:{
+	colorFunc: whiteColor,
+	text: ["LEVEL3", "MONDE"],
+        paddingLeftDivider: 5,
+	nextUrl: "level3.html",
+	}
+};
+console.log(LEVELS_DATA[LEVEL_ID]);
 
 let img;
 let fx;
@@ -26,7 +53,6 @@ let EXPLODE_START_T = 0;
 let soundtrack, explosion_sound, noise_sound;
 
 let REDIRECTING = false;
-let NEXT_URL = 'index.html';
 
 function preload() {
 
@@ -42,11 +68,11 @@ function setup() {
   setupCanvas();
   soundtrack.play();
 
-  points = font.textToPoints(LEVEL_TEXT[LEVEL_ID][0], width / (LEVEL_TEXT[LEVEL_ID][1].length*5), height / 2, 70, {
+  points = font.textToPoints(LEVELS_DATA[LEVEL_ID].text[0], width / (LEVELS_DATA[LEVEL_ID].text[1].length*LEVELS_DATA[LEVEL_ID].paddingLeftDivider), height / 2, 70, {
     sampleFactor: 0.1,
     simplifyThreshold: 0
   });
-  points = points.concat(font.textToPoints(LEVEL_TEXT[LEVEL_ID][1], width / (LEVEL_TEXT[LEVEL_ID][1].length*5), height / 2 + 70, 70, {
+  points = points.concat(font.textToPoints(LEVELS_DATA[LEVEL_ID].text[1], width / (LEVELS_DATA[LEVEL_ID].text[1].length*LEVELS_DATA[LEVEL_ID].paddingLeftDivider), height / 2 + 70, 70, {
     sampleFactor: 0.1,
     simplifyThreshold: 0
   }));
@@ -55,7 +81,7 @@ function setup() {
 
   for (let i = 0; i < NUM_PARTICLES; i++) {
     // x,y,yspeed,random intial offset for use in x and/or ylocate
-    particle_coords.push([points[i].x, height - points[i].y, 3, random(height)]);
+    particle_coords.push([points[i].x, height - points[i].y, 3, random(300)]);
   }
 
   fx = createShader(`
@@ -68,7 +94,6 @@ function setup() {
     uniform sampler2D tex;
     uniform float maxBri;
     uniform vec3 color;
-    uniform float width;
     void main() {
       float bri = 0.0;
       //float maxBri = 0.0008; // adjust depending on the number of particles
@@ -86,22 +111,29 @@ function setup() {
 }
 
 function mouseClicked() {
+  if(mouseX<0 || mouseX>width || mouseY<0 || mouseY>height) {
+	return;
+  }
   if (!EXPLODED) {
     EXPLODED = true;
     EXPLODE_START_T = millis();
     explosion_sound.play();
   } else if (millis() - EXPLODE_START_T > 1000 && !REDIRECTING) {
-     if(window.location.href != NEXT_URL) {
-       window.location.replace(NEXT_URL);
+    redirectToNextUrl();
+  }
+}
+
+function redirectToNextUrl() {
+     if(window.location.href != LEVELS_DATA[LEVEL_ID].nextUrl) {
+       window.location.replace(LEVELS_DATA[LEVEL_ID].nextUrl);
        REDIRECTING = true;
      }
-  }
 }
 
 function draw() {
   img.loadPixels();
 
-  if (!soundtrack.isPlaying() && !noise_sound.isPlaying()) {
+  if (!noise_sound.isPlaying() && noise_sound.isLoaded()) {
     noise_sound.loop();
   }
 
@@ -121,7 +153,7 @@ function draw() {
     maxBri = 0.0001 * (1 + random(7));
     fx.setUniform('maxBri', maxBri);
 
-    fx.setUniform('color', color(255, 255, 255)._array);
+    fx.setUniform('color', LEVELS_DATA[LEVEL_ID].colorFunc()._array);
   } else {
 
     // explode
@@ -145,6 +177,11 @@ function draw() {
     fx.setUniform('maxBri', maxBri);
 
     fx.setUniform('color', lerpColor(color(255, 0, 255), color(0, 255, 255), explode_elapsed / 1000)._array);
+
+    // Auto redirect to home after 10 seconds of explosion
+    if(millis() - EXPLODE_START_T > 1000*soundtrack.duration()) {
+      redirectToNextUrl();
+    }
   }
 
   // prepare 1D pixels map to be read by shader, and to store particle spatial coordinates data
@@ -156,7 +193,6 @@ function draw() {
   }
   img.updatePixels();
   fx.setUniform('tex', img);
-  fx.setUniform('width', width);
 
 
   quad(-1, -1, 1, -1, 1, 1, -1, 1);
