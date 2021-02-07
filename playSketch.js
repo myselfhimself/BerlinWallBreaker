@@ -11,6 +11,12 @@ var BRICK_MARGIN = 4;
 var ROWS = 2;
 var COLUMNS = 5;
 
+var cog1;
+
+function preload() {
+  cog1 = loadImage('cog1.png');
+}
+
 function setup() {
   createCanvas(884, 497);
 
@@ -30,6 +36,22 @@ function setup() {
 
   wallRight = createSprite(width+WALL_THICKNESS/2, height/2, WALL_THICKNESS, height);
   wallRight.immovable = true;
+
+  cogs = new Group();
+
+  for(let h=0; h<2; h++) {
+    for(let w=0; w<5; w++) {
+      cog = createSprite(width/10+w*cog1.width*0.8, height/10+h*cog1.height*0.8, 0, 0);
+      let cogRotDirection = (w%2==0?-1:1)*(h%2==0?-1:1);
+      cog.rotation += 10;
+      cog.rotationSpeed = 3*cogRotDirection;
+      cog.debug = true;
+      cog.addImage(cog1);
+      cog.setCollider('circle');
+      cog.immovable = true;
+      cogs.add(cog);
+    }
+  }
 
   bricks = new Group();
 
@@ -75,6 +97,7 @@ function draw() {
   }
 
   ball.bounce(bricks, brickHit);
+  ball.bounce(cogs, cogHit);
 
   drawSprites();
 }
@@ -86,5 +109,10 @@ function mousePressed() {
 
 function brickHit(ball, brick) {
   brick.remove();
+}
+
+function cogHit(ball, cog) {
+	print("hit cog");
+  cog.remove();
 }
 
