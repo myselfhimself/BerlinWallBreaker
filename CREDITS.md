@@ -14,3 +14,6 @@ Bournemouth Sinfonietta/Richard Studt/Tasmin Little/Robert Aldwinckle
 YouTube licence conceded by WMG; Muserk Rights Management, LatinAutorPerf, SODRAC, União Brasileira de Compositores + 5 digital rights management companies
 
 vinyl noise and explosion from https://samplefocus.com/samples
+
+crepes vegan recipe:
+https://laptitenoisette.com/les-meilleurs-crepe-pour-la-chandeleur/
