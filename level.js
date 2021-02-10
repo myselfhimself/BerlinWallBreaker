@@ -25,9 +25,10 @@ var LEVELS_DATA = [
 ];
 
 var paddle, ball, wallTop, wallBottom, wallLeft, wallRight;
+var BALL_DIAMETER = 20; // 11
 var bricks;
 var MAX_SPEED = 9;
-var WALL_THICKNESS = 30;
+var WALL_THICKNESS = 0;
 var BRICK_W = 80;
 var BRICK_H = 80;
 var BRICK_MARGIN = 4;
@@ -41,24 +42,28 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(884, 497);
+    setupCanvas(false);
 
-    paddle = createSprite(width / 2, height - 50, 110, 20);
+    paddle = createSprite(width / 2, height-11, 110, 20);
     paddle.setCollider('rectangle');
     paddle.debug = true;
     paddle.immovable = true;
 
     wallTop = createSprite(width / 2, -WALL_THICKNESS / 2, width + WALL_THICKNESS * 2, WALL_THICKNESS);
     wallTop.immovable = true;
+    wallTop.debug = true;
 
     wallBottom = createSprite(width / 2, height + WALL_THICKNESS / 2, width + WALL_THICKNESS * 2, WALL_THICKNESS);
     wallBottom.immovable = true;
+    wallBottom.debug = true;
 
     wallLeft = createSprite(-WALL_THICKNESS / 2, height / 2, WALL_THICKNESS, height);
     wallLeft.immovable = true;
+    wallLeft.debug = true;
 
     wallRight = createSprite(width + WALL_THICKNESS / 2, height / 2, WALL_THICKNESS, height);
     wallRight.immovable = true;
+    wallRight.debug = true;
 
     cogs = new Group();
 
@@ -107,19 +112,32 @@ function setup() {
 
 }
 
+function mouseClicked() {
+    print([mouseX, mouseY]);
+}
+
 function draw() {
     background(247, 134, 131);
 
     paddle.position.x = constrain(mouseX, paddle.width / 2, width - paddle.width / 2);
 
     ball.bounce(wallTop);
-    ball.bounce(wallBottom);
     ball.bounce(wallLeft);
     ball.bounce(wallRight);
 
     if (ball.bounce(paddle)) {
         var swing = (ball.position.x - paddle.position.x) / 3;
-        ball.setSpeed(MAX_SPEED, ball.getDirection() + swing);
+        console.log(ball.getDirection());
+        // Flip direction (ie. angle) if positive
+        // positive direction values may occur at the very beginning if the paddle center and ball center get very close
+        // in such a situation, the ball would pass through the paddle downwards after a horizontal slide..
+        let newDirection = ball.getDirection();
+        if(newDirection > 0) {
+            newDirection *= -1.0;
+            print("flipped");
+        }
+        ball.setSpeed(MAX_SPEED, newDirection + swing);
+        console.log(ball.getDirection() + swing);
     }
 
     ball.bounce(bricks, brickHit);
@@ -134,6 +152,10 @@ function gameLogic() {
     if (bricks.length == 0) {
         BWB_GAME_STATE = BWB_GAME_STATE_WIN;
     }
+
+    //if (ball.collide(wallBottom)) {
+    //    BWB_GAME_STATE = BWB_GAME_STATE_LOSE;
+    //}
 
     switch (BWB_GAME_STATE) {
         case BWB_GAME_STATE_WIN:

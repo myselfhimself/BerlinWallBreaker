@@ -16,8 +16,10 @@ function windowResized() {
     centerCanvas();
 }
 
-function setupCanvas() {
-    cnv = createCanvas(BWB_WIDTH, BWB_HEIGHT, WEBGL);
+function setupCanvas(withWebGL /*default: true*/) {
+    withWebGL = withWebGL == undefined ? true : withWebGL;
+    withWebGL = withWebGL ? WEBGL : P2D;
+    cnv = createCanvas(BWB_WIDTH, BWB_HEIGHT, withWebGL);
     cnv.parent('gameScreen');
     centerCanvas();
 }

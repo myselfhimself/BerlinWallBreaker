@@ -121,6 +121,6 @@ function mouseOverStart() {
 
 function mousePressed() {
     if(mouseOverStart()) {
-        redirectToUrlFor('intro1');
+        redirectToUrlFor('intro0');
     }
 }
