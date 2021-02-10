@@ -46,7 +46,6 @@ let particle_coords = [];
 let maxBri;
 
 let points;
-let bonds;
 
 let EXPLODED = false;
 let EXPLODE_START_T = 0;
@@ -65,6 +64,7 @@ function preload() {
 function setup() {
     BWB_WIDTH = BWB_HEIGHT = 300;
     setupCanvas();
+    cursor(HAND);
     soundtrack.play();
 
     points = font.textToPoints(LEVELS_DATA[BWB_LEVEL_ID].text[0], width / (LEVELS_DATA[BWB_LEVEL_ID].text[1].length * LEVELS_DATA[BWB_LEVEL_ID].paddingLeftDivider), height / 2, 70, {
