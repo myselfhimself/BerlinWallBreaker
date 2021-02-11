@@ -25,7 +25,9 @@ var LEVELS_DATA = [
 ];
 
 var paddle, ball, wallTop, wallBottom, wallLeft, wallRight;
-var BALL_DIAMETER = 20; // 11
+var BALL_DIAMETER = 30;
+var BALL_START_POSITION_X = function () { return width / 2;};
+var BALL_START_POSITION_Y = function () { return height - 200;};
 var bricks;
 var MAX_SPEED = 9;
 var WALL_THICKNESS = 0;
@@ -101,9 +103,9 @@ function setup() {
 
     //the easiest way to avoid pesky multiple collision is to
     //have the ball bigger than the bricks
-    ball = createSprite(width / 2, height - 200, 11, 11);
+    ball = createSprite(BALL_START_POSITION_X(), BALL_START_POSITION_Y(), BALL_DIAMETER, BALL_DIAMETER);
     ball.draw = function () {
-        ellipse(0, 0, 30, 30);
+        ellipse(0, 0, BALL_DIAMETER, BALL_DIAMETER);
     };
     ball.setCollider('circle');
     ball.debug = true;
@@ -113,6 +115,7 @@ function setup() {
 }
 
 function mouseClicked() {
+    // debugging
     print([mouseX, mouseY]);
 }
 
@@ -153,9 +156,9 @@ function gameLogic() {
         BWB_GAME_STATE = BWB_GAME_STATE_WIN;
     }
 
-    //if (ball.collide(wallBottom)) {
-    //    BWB_GAME_STATE = BWB_GAME_STATE_LOSE;
-    //}
+    if (ball.collide(wallBottom)) {
+        BWB_GAME_STATE = BWB_GAME_STATE_LOSE;
+    }
 
     switch (BWB_GAME_STATE) {
         case BWB_GAME_STATE_WIN:
@@ -163,6 +166,12 @@ function gameLogic() {
             break;
         case BWB_GAME_STATE_LOSE:
             redirectToGameOver();
+    }
+
+    // Prevent ball from going away forever through walls
+    if (ball.position.x < 0 || ball.position.x > width || ball.position.y < 0 || ball.position.y > height) {
+        ball.position.x = BALL_START_POSITION_X();
+        ball.position.y = BALL_START_POSITION_Y();
     }
 }
 
