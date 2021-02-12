@@ -35,6 +35,15 @@ LEVELS_DATA = [
         paddingLeftDivider: 2,
         nextUrlSlug: "home",
     },
+    // #4 - YOU WIN
+    {
+        colorFunc: function () {
+            return color(random(255), random(255), random(255));
+        },
+        text: ["YOU", "WIN"],
+        paddingLeftDivider: 2,
+        nextUrlSlug: "home",
+    },
 
 ];
 console.log(LEVELS_DATA[BWB_LEVEL_ID]);

@@ -38,7 +38,7 @@ var BWB_GAME_STATE = BWB_GAME_STATE_PLAYING;
 var BWB_REDIRECTING = false;
 var BWB_LEVEL_ID = location.hash;
 var BWB_URL_GAME_OVER = 'level_intro.html#level3';
-var BWB_URL_WIN = 'win.html';
+var BWB_URL_WIN = 'level_intro.html#level4';
 var BWB_URL_HOME = 'home.html';
 
 if (BWB_LEVEL_ID == undefined || BWB_LEVEL_ID.indexOf('#level') != 0 || BWB_LEVEL_ID.length != '#level1'.length) {
