@@ -2,7 +2,7 @@
 //
 //breakout close (core mechanics)
 //mouse to control the paddle, click to start
-BWB_DEBUG = true;
+BWB_DEBUG = false;
 
 var LEVELS_DATA = [
     // Level 1
@@ -125,24 +125,24 @@ function setup() {
 
     paddle = createSprite(width / 2, height-11, 110, 20);
     paddle.setCollider('rectangle');
-    paddle.debug = true;
+    paddle.debug = BWB_DEBUG;
     paddle.immovable = true;
 
     wallTop = createSprite(width / 2, -WALL_THICKNESS / 2, width + WALL_THICKNESS * 2, WALL_THICKNESS);
     wallTop.immovable = true;
-    wallTop.debug = true;
+    wallTop.debug = BWB_DEBUG;
 
     wallBottom = createSprite(width / 2, height + WALL_THICKNESS / 2, width + WALL_THICKNESS * 2, WALL_THICKNESS);
     wallBottom.immovable = true;
-    wallBottom.debug = true;
+    wallBottom.debug = BWB_DEBUG;
 
     wallLeft = createSprite(-WALL_THICKNESS / 2, height / 2, WALL_THICKNESS, height);
     wallLeft.immovable = true;
-    wallLeft.debug = true;
+    wallLeft.debug = BWB_DEBUG;
 
     wallRight = createSprite(width + WALL_THICKNESS / 2, height / 2, WALL_THICKNESS, height);
     wallRight.immovable = true;
-    wallRight.debug = true;
+    wallRight.debug = BWB_DEBUG;
 
     bricks = new Group();
 
@@ -157,7 +157,7 @@ function setup() {
         ellipse(0, 0, BALL_DIAMETER, BALL_DIAMETER);
     };
     ball.setCollider('circle');
-    ball.debug = true;
+    ball.debug = BWB_DEBUG;
     ball.maxSpeed = MAX_SPEED;
     paddle.shapeColor = ball.shapeColor = color(255, 255, 255);
 
