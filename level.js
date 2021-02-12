@@ -7,6 +7,7 @@ BWB_DEBUG = false;
 var LEVELS_DATA = [
     // Level 1
     {
+        background: 'sprites/level1.png',
         bricks: {
             count: 10,
             width: 20,
@@ -36,6 +37,7 @@ var LEVELS_DATA = [
     },
     // Level 2
     {
+        background: 'sprites/level2.png',
         bricks: {
             count: 10,
             width: 20,
@@ -65,6 +67,7 @@ var LEVELS_DATA = [
     },
     // Level 3
     {
+        background: 'sprites/level3.png',
         bricks: {
             count: 10,
             width: 20,
@@ -114,10 +117,14 @@ var COLUMNS = 5;
 var cog1; // cog image
 var cog1_interspacing_width_ratio = 0.8;
 
+var LEVEL_BACKGROUND;
+
 function preload() {
     if(LEVELS_DATA[BWB_LEVEL_ID].bricks.preload != null) {
         LEVELS_DATA[BWB_LEVEL_ID].bricks.preload();
     }
+
+    LEVEL_BACKGROUND = loadImage(LEVELS_DATA[BWB_LEVEL_ID].background);
 }
 
 function setup() {
@@ -169,7 +176,7 @@ function mouseClicked() {
 }
 
 function draw() {
-    background(247, 134, 131);
+    background(LEVEL_BACKGROUND);
 
     if(LEVELS_DATA[BWB_LEVEL_ID].bricks.draw != null) {
         LEVELS_DATA[BWB_LEVEL_ID].bricks.draw();
