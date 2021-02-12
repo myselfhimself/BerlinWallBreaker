@@ -246,6 +246,14 @@ function gameLogic() {
 }
 
 function keyReleased() {
+    if(keyCode == 68) { // D to toggle debugging
+        BWB_DEBUG = !BWB_DEBUG;
+        ball.debug = paddle.debug = BWB_DEBUG;
+        for(let b = 0; b < bricks.length; b++) {
+            bricks[b].debug = BWB_DEBUG;
+        }
+    }
+
     // Win / Lose debugging shortcuts
     if(BWB_DEBUG && BWB_GAME_STATE == BWB_GAME_STATE_PLAYING) {
         if (keyCode == 87) { // W
