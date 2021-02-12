@@ -2,45 +2,122 @@
 //
 //breakout close (core mechanics)
 //mouse to control the paddle, click to start
+BWB_DEBUG = true;
 
 var LEVELS_DATA = [
+    // Level 1
     {
         bricks: {
-            count: 10
+            count: 10,
+            width: 20,
+            height: 20,
+            preload: null,
+            setup: function () {
+
+                var offsetX = width / 2 - (COLUMNS - 1) * (BRICK_MARGIN + BRICK_W) / 2;
+                var offsetY = 80;
+
+                for (var r = 0; r < ROWS; r++)
+                    for (var c = 0; c < COLUMNS; c++) {
+                        var brick = createSprite(offsetX + c * (BRICK_W + BRICK_MARGIN), offsetY + r * (BRICK_H + BRICK_MARGIN), BRICK_W, BRICK_H);
+                        brick.draw = function () {
+                            ellipse(0, 0, BRICK_W, BRICK_H);
+                        };
+                        brick.setCollider('circle');
+                        brick.debug = BWB_DEBUG;
+                        brick.shapeColor = color(255, 255, 255);
+                        bricks.add(brick);
+                        brick.immovable = true;
+                    }
+            },
+            draw: null,
         },
         nextUrlSlug: "intro1",
     },
+    // Level 2
     {
         bricks: {
-            count: 10
+            count: 10,
+            width: 20,
+            height: 20,
+            preload: null,
+            setup: function () {
+
+                var offsetX = width / 2 - (COLUMNS - 1) * (BRICK_MARGIN + BRICK_W) / 2;
+                var offsetY = 80;
+
+                for (var r = 0; r < ROWS; r++)
+                    for (var c = 0; c < COLUMNS; c++) {
+                        var brick = createSprite(offsetX + c * (BRICK_W + BRICK_MARGIN), offsetY + r * (BRICK_H + BRICK_MARGIN), BRICK_W, BRICK_H);
+                        brick.draw = function () {
+                            rect(0, 0, BRICK_W, BRICK_H);
+                        };
+                        brick.setCollider('rectangle');
+                        brick.debug = BWB_DEBUG;
+                        brick.shapeColor = color(255, 255, 255);
+                        bricks.add(brick);
+                        brick.immovable = true;
+                    }
+            },
+            draw: null,
         },
         nextUrlSlug: "intro2",
     },
+    // Level 3
     {
         bricks: {
-            count: 10
+            count: 10,
+            width: 20,
+            height: 20,
+            collider: 'circle',
+            preload: function () {
+                cog1 = loadImage('cog1.png');
+            },
+            setup: function() {
+                var offsetX = width / 2 - (COLUMNS - 1) * (cog1_interspacing_width_ratio*cog1.width) / 2;
+                var offsetY = 80;
+                    for (let h = 0; h < ROWS; h++) {
+                        for (let w = 0; w < COLUMNS; w++) {
+                            cog = createSprite(offsetX + w * cog1.width * cog1_interspacing_width_ratio, offsetY + h * cog1.height * cog1_interspacing_width_ratio, 0, 0);
+                            let cogRotDirection = (w % 2 == 0 ? -1 : 1) * (h % 2 == 0 ? -1 : 1);
+                            cog.rotation += 10;
+                            cog.rotationSpeed = 3 * cogRotDirection;
+                            cog.debug = BWB_DEBUG;
+                            cog.addImage(cog1);
+                            cog.setCollider('circle');
+                            cog.immovable = true;
+
+                            bricks.add(cog);
+                        }
+                    }
+                },
+            draw: null,
         },
         nextUrlSlug: "win",
     }
 ];
 
 var paddle, ball, wallTop, wallBottom, wallLeft, wallRight;
+var bricks;
 var BALL_DIAMETER = 30;
 var BALL_START_POSITION_X = function () { return width / 2;};
 var BALL_START_POSITION_Y = function () { return height - 200;};
-var bricks;
 var MAX_SPEED = 9;
+var BALL_SPEED = 0;
 var WALL_THICKNESS = 0;
 var BRICK_W = 80;
 var BRICK_H = 80;
-var BRICK_MARGIN = 4;
+var BRICK_MARGIN = BRICK_W/20;
 var ROWS = 2;
 var COLUMNS = 5;
 
-var cog1;
+var cog1; // cog image
+var cog1_interspacing_width_ratio = 0.8;
 
 function preload() {
-    cog1 = loadImage('cog1.png');
+    if(LEVELS_DATA[BWB_LEVEL_ID].bricks.preload != null) {
+        LEVELS_DATA[BWB_LEVEL_ID].bricks.preload();
+    }
 }
 
 function setup() {
@@ -67,39 +144,11 @@ function setup() {
     wallRight.immovable = true;
     wallRight.debug = true;
 
-    cogs = new Group();
-
-    for (let h = 0; h < 2; h++) {
-        for (let w = 0; w < 5; w++) {
-            cog = createSprite(width / 10 + w * cog1.width * 0.8, height / 10 + h * cog1.height * 0.8, 0, 0);
-            let cogRotDirection = (w % 2 == 0 ? -1 : 1) * (h % 2 == 0 ? -1 : 1);
-            cog.rotation += 10;
-            cog.rotationSpeed = 3 * cogRotDirection;
-            cog.debug = true;
-            cog.addImage(cog1);
-            cog.setCollider('circle');
-            cog.immovable = true;
-            cogs.add(cog);
-        }
-    }
-
     bricks = new Group();
 
-    var offsetX = width / 2 - (COLUMNS - 1) * (BRICK_MARGIN + BRICK_W) / 2;
-    var offsetY = 80;
-
-    for (var r = 0; r < ROWS; r++)
-        for (var c = 0; c < COLUMNS; c++) {
-            var brick = createSprite(offsetX + c * (BRICK_W + BRICK_MARGIN), offsetY + r * (BRICK_H + BRICK_MARGIN), BRICK_W, BRICK_H);
-            brick.draw = function () {
-                ellipse(0, 0, BRICK_W, BRICK_H);
-            };
-            brick.setCollider('circle');
-            brick.debug = true;
-            brick.shapeColor = color(255, 255, 255);
-            bricks.add(brick);
-            brick.immovable = true;
-        }
+    if(LEVELS_DATA[BWB_LEVEL_ID].bricks.setup != null) {
+        LEVELS_DATA[BWB_LEVEL_ID].bricks.setup();
+    }
 
     //the easiest way to avoid pesky multiple collision is to
     //have the ball bigger than the bricks
@@ -122,7 +171,28 @@ function mouseClicked() {
 function draw() {
     background(247, 134, 131);
 
+    if(LEVELS_DATA[BWB_LEVEL_ID].bricks.draw != null) {
+        LEVELS_DATA[BWB_LEVEL_ID].bricks.draw();
+    }
+
+    drawSprites();
+
+
+    if (BWB_GAME_STATE == BWB_GAME_STATE_PAUSED) {
+        textSize(32);
+        text('PAUSE', 10, 30);
+        fill(0, 102, 153);
+        text('PAUSE', 10, 60);
+        fill(0, 102, 153, 51);
+        text('PAUSE', 10, 90);
+    } else {
+        gameLogic();
+    }
+}
+
+function gameLogic() {
     paddle.position.x = constrain(mouseX, paddle.width / 2, width - paddle.width / 2);
+
 
     ball.bounce(wallTop);
     ball.bounce(wallLeft);
@@ -140,18 +210,12 @@ function draw() {
             print("flipped");
         }
         ball.setSpeed(MAX_SPEED, newDirection + swing);
+        BALL_SPEED = ball.getSpeed();
         console.log(ball.getDirection() + swing);
     }
 
     ball.bounce(bricks, brickHit);
-    ball.bounce(cogs, cogHit);
 
-    drawSprites();
-
-    gameLogic();
-}
-
-function gameLogic() {
     if (bricks.length == 0) {
         BWB_GAME_STATE = BWB_GAME_STATE_WIN;
     }
@@ -160,40 +224,67 @@ function gameLogic() {
         BWB_GAME_STATE = BWB_GAME_STATE_LOSE;
     }
 
+    // Prevent ball from going away forever through walls
+    if (ball.position.x < 0 || ball.position.x > width || ball.position.y < 0 || ball.position.y > height) {
+        ball.position.x = BALL_START_POSITION_X();
+        ball.position.y = BALL_START_POSITION_Y();
+    }
+
+    // Do not allow exactly horizontal ball flight
+    if(ball.getDirection() == 0) {
+        ball.setSpeed(BALL_SPEED, ball.getDirection()+1);
+    }
+
     switch (BWB_GAME_STATE) {
         case BWB_GAME_STATE_WIN:
             redirectToUrlFor(LEVELS_DATA[BWB_LEVEL_ID].nextUrlSlug);
             break;
         case BWB_GAME_STATE_LOSE:
             redirectToGameOver();
-    }
-
-    // Prevent ball from going away forever through walls
-    if (ball.position.x < 0 || ball.position.x > width || ball.position.y < 0 || ball.position.y > height) {
-        ball.position.x = BALL_START_POSITION_X();
-        ball.position.y = BALL_START_POSITION_Y();
+            break;
     }
 }
 
 function keyReleased() {
-    if (keyCode == 87) { // W
-        BWB_GAME_STATE = BWB_GAME_STATE_WIN;
-    } else if (keyCode == 76) { // L
-        BWB_GAME_STATE = BWB_GAME_STATE_LOSE;
+    // Win / Lose debugging shortcuts
+    if(BWB_DEBUG && BWB_GAME_STATE == BWB_GAME_STATE_PLAYING) {
+        if (keyCode == 87) { // W
+            BWB_GAME_STATE = BWB_GAME_STATE_WIN;
+        } else if (keyCode == 76) { // L
+            BWB_GAME_STATE = BWB_GAME_STATE_LOSE;
+        }
+    }
+
+    if(BWB_GAME_STATE == BWB_GAME_STATE_PLAYING || BWB_GAME_STATE == BWB_GAME_STATE_PAUSED) {
+        if (keyCode == 27) { // Escape
+            if (BWB_GAME_STATE == BWB_GAME_STATE_PAUSED) {
+                ball.setSpeed(BALL_SPEED);
+                BWB_GAME_STATE = BWB_GAME_STATE_PLAYING;
+            } else {
+                pause();
+            }
+        }
     }
 }
 
+function pause() {
+    BWB_GAME_STATE = BWB_GAME_STATE_PAUSED;
+    BALL_SPEED = ball.getSpeed();
+    ball.setSpeed(0);
+}
+function unpause() {
+    BWB_GAME_STATE = BWB_GAME_STATE_PLAYING;
+    ball.setSpeed(BALL_SPEED);
+}
+
 function mousePressed() {
-    if (ball.velocity.x == 0 && ball.velocity.y == 0)
+    if (BWB_GAME_STATE == BWB_GAME_STATE_PLAYING && ball.velocity.x == 0 && ball.velocity.y == 0) {
         ball.setSpeed(MAX_SPEED, random(90 - 10, 90 + 10));
+    } else if(BWB_GAME_STATE == BWB_GAME_STATE_PAUSED) {
+        unpause();
+    }
 }
 
 function brickHit(ball, brick) {
     brick.remove();
 }
-
-function cogHit(ball, cog) {
-    print("hit cog");
-    cog.remove();
-}
-

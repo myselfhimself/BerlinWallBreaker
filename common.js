@@ -1,3 +1,5 @@
+BWB_DEBUG = false; // Export mode
+
 // CANVAS SETUP
 var BWB_WIDTH = 884;
 var BWB_HEIGHT = 497;
@@ -29,6 +31,7 @@ function setupCanvas(withWebGL /*default: true*/) {
 var BWB_GAME_STATE_LOSE = 0;
 var BWB_GAME_STATE_PLAYING = 1;
 var BWB_GAME_STATE_WIN = 2;
+var BWB_GAME_STATE_PAUSED = 3;
 var BWB_GAME_STATE = BWB_GAME_STATE_PLAYING;
 
 // LEVEL DETECTION AND REDIRECTION FROM URL
@@ -64,7 +67,7 @@ function redirectToUrlFor(slug) {
 }
 
 function redirectToUrl(url) {
-    if (window.location.href != url) {
+    if (window.location.href != url || !BWB_REDIRECTING) {
         window.location.replace(url);
         BWB_REDIRECTING = true;
     }
