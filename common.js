@@ -38,8 +38,9 @@ var BWB_GAME_STATE = BWB_GAME_STATE_PLAYING;
 var BWB_REDIRECTING = false;
 var BWB_LEVEL_ID = location.hash;
 var BWB_URL_GAME_OVER = 'level_intro.html#level3';
-var BWB_URL_WIN = 'level_intro.html#level4';
+var BWB_URL_WIN = 'youwin.html';
 var BWB_URL_HOME = 'home.html';
+var BWB_URL_MAKING_OF = 'makingof.html';
 
 if (BWB_LEVEL_ID == undefined || BWB_LEVEL_ID.indexOf('#level') != 0 || BWB_LEVEL_ID.length != '#level1'.length) {
     console.log('Level is unset, defaulting to 1');
@@ -59,6 +60,8 @@ function urlFor(slug) {
         return BWB_URL_HOME;
     } else if (slug == 'gameover') {
         return BWB_URL_GAME_OVER;
+    } else if (slug == 'makingof') {
+        return BWB_URL_MAKING_OF;
     }
 }
 
