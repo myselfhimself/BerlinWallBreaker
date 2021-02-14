@@ -24,3 +24,11 @@ https://github.com/StefanTraistaru/batch-export
 "Explainer video foley projector hybrid film antique fade pitch bend" audio sample from:
 https://mixkit.co/free-sound-effects/movie-projector/
 Under the Mixkit.co free license
+
+
+Camille Saint-Saens, Le carnaval des animaux - Le cygne
+Saint-Saëns: Le Carnaval des Animaux, R. 125 - 13. Le Cygne · Christopher van Kampen · Pascal Rogé · Cristina Ortiz · London Sinfonietta · Charles Dutoit
+Saint-Saëns: Le Carnaval des Animaux; Phaéton; Danse Macabre etc.
+℗ 1986 Decca Music Group Limited
+Released on: 1980-01-01
+https://www.youtube.com/watch?v=ONF_Bw9Ycp4

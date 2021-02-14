@@ -70,9 +70,14 @@ function redirectToUrlFor(slug) {
 }
 
 function redirectToUrl(url) {
-    if (window.location.href != url || !BWB_REDIRECTING) {
-        window.location.replace(url);
+    if (!BWB_REDIRECTING) {
         BWB_REDIRECTING = true;
+        if(window.location.href != url) {
+            setTimeout(function(){
+                window.location.href = url;
+            }, 1500);
+            //window.location.href = url;
+        }
     }
 }
 

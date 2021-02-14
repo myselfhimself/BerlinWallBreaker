@@ -8,6 +8,7 @@ var LEVELS_DATA = [
     // Level 1
     {
         background: 'sprites/level1.png',
+        soundtrack: 'assets/CamilleStSaensLeCygneCarnavalDesAnimauxMono.mp3',
         bricks: {
             count: 10,
             width: 20,
@@ -38,6 +39,7 @@ var LEVELS_DATA = [
     // Level 2
     {
         background: 'sprites/level2.png',
+        soundtrack: null,
         bricks: {
             count: 10,
             width: 20,
@@ -68,6 +70,7 @@ var LEVELS_DATA = [
     // Level 3
     {
         background: 'sprites/level3.png',
+        soundtrack: null,
         bricks: {
             count: 10,
             width: 20,
@@ -100,14 +103,18 @@ var LEVELS_DATA = [
     }
 ];
 
+// Sprites
 var paddle, ball, wallTop, wallBottom, wallLeft, wallRight;
-
 var bricks;
+
+// Sound
 var brickExplodeSound;
 var paddleHitSound;
 var borderHitSound;
 var bottomHitSound;
+var soundtrack;
 
+// Game constants
 var BALL_DIAMETER = 30;
 var BALL_START_POSITION_X = function () { return width / 2;};
 var BALL_START_POSITION_Y = function () { return height - 200;};
@@ -128,6 +135,10 @@ var LEVEL_BACKGROUND;
 function preload() {
     if(LEVELS_DATA[BWB_LEVEL_ID].bricks.preload != null) {
         LEVELS_DATA[BWB_LEVEL_ID].bricks.preload();
+    }
+
+    if(LEVELS_DATA[BWB_LEVEL_ID].soundtrack != null) {
+        soundtrack = loadSound(LEVELS_DATA[BWB_LEVEL_ID].soundtrack);
     }
 
     LEVEL_BACKGROUND = loadImage(LEVELS_DATA[BWB_LEVEL_ID].background);
@@ -188,6 +199,10 @@ function mouseClicked() {
 
 function draw() {
     background(LEVEL_BACKGROUND);
+
+    if(LEVELS_DATA[BWB_LEVEL_ID].soundtrack != null && soundtrack != undefined && !soundtrack.isPlaying()) {
+        soundtrack.loop();
+    }
 
     if(LEVELS_DATA[BWB_LEVEL_ID].bricks.draw != null) {
         LEVELS_DATA[BWB_LEVEL_ID].bricks.draw();
@@ -253,13 +268,19 @@ function gameLogic() {
         ball.setSpeed(BALL_SPEED, ball.getDirection()+1);
     }
 
-    switch (BWB_GAME_STATE) {
-        case BWB_GAME_STATE_WIN:
-            redirectToUrlFor(LEVELS_DATA[BWB_LEVEL_ID].nextUrlSlug);
-            break;
-        case BWB_GAME_STATE_LOSE:
-            redirectToGameOver();
-            break;
+    if(BWB_GAME_STATE == BWB_GAME_STATE_WIN || BWB_GAME_STATE == BWB_GAME_STATE_LOSE) {
+        // Reset ball position to prevent deadlocks when ball starts having a horizontal direction on game lose
+        ball.position.x = BALL_START_POSITION_X();
+        ball.position.y = BALL_START_POSITION_Y();
+        ball.setSpeed(0, 0);
+        switch (BWB_GAME_STATE) {
+            case BWB_GAME_STATE_WIN:
+                redirectToUrlFor(LEVELS_DATA[BWB_LEVEL_ID].nextUrlSlug);
+                break;
+            case BWB_GAME_STATE_LOSE:
+                redirectToGameOver();
+                break;
+        }
     }
 }
 
