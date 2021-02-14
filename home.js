@@ -1,8 +1,15 @@
+// sound
+let soundtrack;
+
+// models
+let game_start;
 let game_title;
-let button;
+
+// logo orientation
 let lastXAngle = 0;
 let lastZAngle = 0;
 
+// state & animation progress management
 let HOME_STATE_POSTER = 0;
 let HOME_STATE_MENU = 1;
 let HOME_STATE = HOME_STATE_POSTER;
@@ -137,7 +144,8 @@ function mouseOverStart() {
     return mouseX > 290 && mouseX < 600 && mouseY > 265 && mouseY < 435;
 }
 
-function mousePressed() {
+function mouseReleased() {
+    userStartAudio(); // Chrome hack
     if(HOME_STATE == HOME_STATE_POSTER) {
         if(mouseX < width && mouseX > 0 && mouseY < height && mouseY > 0) {
             HOME_STATE = HOME_STATE_MENU;
