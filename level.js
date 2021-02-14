@@ -101,7 +101,13 @@ var LEVELS_DATA = [
 ];
 
 var paddle, ball, wallTop, wallBottom, wallLeft, wallRight;
+
 var bricks;
+var brickExplodeSound;
+var paddleHitSound;
+var borderHitSound;
+var bottomHitSound;
+
 var BALL_DIAMETER = 30;
 var BALL_START_POSITION_X = function () { return width / 2;};
 var BALL_START_POSITION_Y = function () { return height - 200;};
@@ -125,6 +131,11 @@ function preload() {
     }
 
     LEVEL_BACKGROUND = loadImage(LEVELS_DATA[BWB_LEVEL_ID].background);
+
+    brickExplodeSound = loadSound('assets/cold-explosion-fx.wav');
+    paddleHitSound = loadSound('assets/zapsplat_bell_service_disk_ring_slightly_broken_resonate_18042.mp3');
+    borderHitSound = loadSound('assets/Click2-Sebastian-759472264.mp3');
+    bottomHitSound = loadSound('assets/service-bell_daniel_simion.mp3');
 }
 
 function setup() {
@@ -201,11 +212,11 @@ function gameLogic() {
     paddle.position.x = constrain(mouseX, paddle.width / 2, width - paddle.width / 2);
 
 
-    ball.bounce(wallTop);
-    ball.bounce(wallLeft);
-    ball.bounce(wallRight);
+    ball.bounce(wallTop, borderHit);
+    ball.bounce(wallLeft, borderHit);
+    ball.bounce(wallRight, borderHit);
 
-    if (ball.bounce(paddle)) {
+    if (ball.bounce(paddle, paddleHit)) {
         var swing = (ball.position.x - paddle.position.x) / 3;
         console.log(ball.getDirection());
         // Flip direction (ie. angle) if positive
@@ -227,7 +238,7 @@ function gameLogic() {
         BWB_GAME_STATE = BWB_GAME_STATE_WIN;
     }
 
-    if (ball.collide(wallBottom)) {
+    if (ball.collide(wallBottom, bottomHit)) {
         BWB_GAME_STATE = BWB_GAME_STATE_LOSE;
     }
 
@@ -302,4 +313,17 @@ function mousePressed() {
 
 function brickHit(ball, brick) {
     brick.remove();
+    brickExplodeSound.play();
+}
+
+function paddleHit(ball, paddle) {
+    paddleHitSound.play();
+}
+
+function borderHit(ball, border) {
+    borderHitSound.play();
+}
+
+function bottomHit(ball, bottom) {
+    bottomHitSound.play();
 }
