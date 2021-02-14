@@ -17,3 +17,10 @@ vinyl noise and explosion from https://samplefocus.com/samples
 
 crepes vegan recipe:
 https://laptitenoisette.com/les-meilleurs-crepe-pour-la-chandeleur/
+
+Inkscape Batch Export plugin from:
+https://github.com/StefanTraistaru/batch-export
+
+"Explainer video foley projector hybrid film antique fade pitch bend" audio sample from:
+https://mixkit.co/free-sound-effects/movie-projector/
+Under the Mixkit.co free license

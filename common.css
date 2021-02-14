@@ -8,5 +8,11 @@
     background-position: 0% 0%;
     background-image: repeating-linear-gradient(-25deg, #6b5b95, #6b5b95 10px, #feb236 10px, #feb236 20px, #d64161 20px, #d64161 30px, #ff7b25 30px, #ff7b25 40px);
     animation: barberpole 4s linear infinite;
+    display: inline-block;
 }
 
+#gameOuter > p {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
