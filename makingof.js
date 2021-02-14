@@ -36,7 +36,7 @@ function draw() {
     addLineBreak();
 
     addHeading('NIVEAU 3 - Monde');
-    addParagraph('Crêpes vegan, chocolat blanc au cornet');
+    addParagraph('Crêpes vegan, chocolat noir & blanc au cornet');
     addLineBreak();
 
     addHeading('p5 / WEBGL (accueil, transitions)');
