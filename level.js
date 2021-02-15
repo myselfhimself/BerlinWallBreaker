@@ -7,14 +7,19 @@ BWB_DEBUG = false;
 var LEVELS_DATA = [
     // Level 1
     {
-        background: 'sprites/level1.png',
+        background: 'sprites/food/level1/background/caen_background.png',
         soundtrack: 'assets/CamilleStSaensLeCygneCarnavalDesAnimauxMono.mp3',
+        ball_start_x: function(){return width / 2;},
+        ball_start_y: function(){return height - 350;},
         bricks: {
             count: 10,
             width: 20,
             height: 20,
             preload: null,
             setup: function () {
+                // override global row x col variables
+                let COLUMNS = 8;
+                let ROWS = 1;
 
                 var offsetX = width / 2 - (COLUMNS - 1) * (BRICK_MARGIN + BRICK_W) / 2;
                 var offsetY = 80;
@@ -38,7 +43,7 @@ var LEVELS_DATA = [
     },
     // Level 2
     {
-        background: 'sprites/level2.png',
+        background: 'sprites/food/level2/background/lehavre_background.png',
         soundtrack: null,
         bricks: {
             count: 10,
@@ -69,7 +74,7 @@ var LEVELS_DATA = [
     },
     // Level 3
     {
-        background: 'sprites/level3.png',
+        background: 'sprites/food/level3/background/monde_background.png',
         soundtrack: null,
         bricks: {
             count: 10,
@@ -116,8 +121,8 @@ var soundtrack;
 
 // Game constants
 var BALL_DIAMETER = 30;
-var BALL_START_POSITION_X = function () { return width / 2;};
-var BALL_START_POSITION_Y = function () { return height - 200;};
+var BALL_START_POSITION_X = function () { return LEVELS_DATA[BWB_LEVEL_ID].ball_start_x != undefined ? LEVELS_DATA[BWB_LEVEL_ID].ball_start_x() : width / 2;};
+var BALL_START_POSITION_Y = function () { return LEVELS_DATA[BWB_LEVEL_ID].ball_start_y != undefined ? LEVELS_DATA[BWB_LEVEL_ID].ball_start_y() : height - 200;};
 var MAX_SPEED = 9;
 var BALL_SPEED = 0;
 var WALL_THICKNESS = 0;
