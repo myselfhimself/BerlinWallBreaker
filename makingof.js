@@ -28,15 +28,15 @@ function draw() {
     addLineBreak();
 
     addHeading('NIVEAU 1 - Caen');
-    addParagraph('Pommes, céleris, chocolat noir au cornet');
+    addParagraph('Pommes, chocolat noir');
     addLineBreak();
 
     addHeading('NIVEAU 2 - Le Havre');
-    addParagraph('Betteraves, chocolat blanc au cornet');
+    addParagraph('Betteraves, chocolat blanc');
     addLineBreak();
 
     addHeading('NIVEAU 3 - Monde');
-    addParagraph('Crêpes vegan, chocolat noir & blanc au cornet');
+    addParagraph('Crêpes vegan, chocolat noir & blanc');
     addLineBreak();
 
     addHeading('p5 / WEBGL (accueil, transitions)');
