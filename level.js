@@ -9,6 +9,7 @@ var LEVELS_DATA = [
     {
         background: 'sprites/food/level1/background/caen_background.png',
         soundtrack: 'assets/CamilleStSaensLeCygneCarnavalDesAnimauxMono.mp3',
+        soundtrack_volume: 1.0,
         ball_start_x: function(){return width / 2;},
         ball_start_y: function(){return height - 350;},
         bricks: {
@@ -45,6 +46,7 @@ var LEVELS_DATA = [
     {
         background: 'sprites/food/level2/background/lehavre_background.png',
         soundtrack: null,
+        soundtrack_volume: 1.0,
         bricks: {
             count: 10,
             width: 20,
@@ -76,25 +78,29 @@ var LEVELS_DATA = [
     {
         background: 'sprites/food/level3/background/monde_background.png',
         soundtrack: null,
+        soundtrack_volume: 0.5,
         bricks: {
             count: 10,
             width: 20,
             height: 20,
             collider: 'circle',
             preload: function () {
-                cog1 = loadImage('cog1.png');
+                cog1 = loadImage('sprites/food/level3/bricks/cog1.png');
+                cog2 = loadImage('sprites/food/level3/bricks/cog2.png');
+                cog3 = loadImage('sprites/food/level3/bricks/cog3.png');
+                cogs = [cog1, cog2, cog3];
             },
             setup: function() {
-                var offsetX = width / 2 - (COLUMNS - 1) * (cog1_interspacing_width_ratio*cog1.width) / 2;
+                var offsetX = width / 2 - (COLUMNS - 1) * (cogs_interspacing_width_ratio*cog1.width) / 2;
                 var offsetY = 80;
                     for (let h = 0; h < ROWS; h++) {
                         for (let w = 0; w < COLUMNS; w++) {
-                            cog = createSprite(offsetX + w * cog1.width * cog1_interspacing_width_ratio, offsetY + h * cog1.height * cog1_interspacing_width_ratio, 0, 0);
+                            cog = createSprite(offsetX + w * cog1.width * cogs_interspacing_width_ratio, offsetY + h * cog1.height * cogs_interspacing_width_ratio, 0, 0);
                             let cogRotDirection = (w % 2 == 0 ? -1 : 1) * (h % 2 == 0 ? -1 : 1);
                             cog.rotation += 10;
                             cog.rotationSpeed = 3 * cogRotDirection;
                             cog.debug = BWB_DEBUG;
-                            cog.addImage(cog1);
+                            cog.addImage(cogs[(h+w) % 3]);
                             cog.setCollider('circle');
                             cog.immovable = true;
 
@@ -126,14 +132,17 @@ var BALL_START_POSITION_Y = function () { return LEVELS_DATA[BWB_LEVEL_ID].ball_
 var MAX_SPEED = 9;
 var BALL_SPEED = 0;
 var WALL_THICKNESS = 0;
-var BRICK_W = 80;
-var BRICK_H = 80;
+var BRICK_W = 100;
+var BRICK_H = 100;
 var BRICK_MARGIN = BRICK_W/20;
 var ROWS = 2;
 var COLUMNS = 5;
 
 var cog1; // cog image
-var cog1_interspacing_width_ratio = 0.8;
+var cog2; // cog image
+var cog3; // cog image
+var cogs; // list of cog images
+var cogs_interspacing_width_ratio = 0.8;
 
 var LEVEL_BACKGROUND;
 
@@ -207,6 +216,7 @@ function draw() {
 
     if(LEVELS_DATA[BWB_LEVEL_ID].soundtrack != null && soundtrack != undefined && !soundtrack.isPlaying()) {
         soundtrack.loop();
+        soundtrack.setVolume(LEVELS_DATA[BWB_LEVEL_ID].soundtrack_volume);
     }
 
     if(LEVELS_DATA[BWB_LEVEL_ID].bricks.draw != null) {
