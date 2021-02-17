@@ -13,6 +13,7 @@ function setup() {
     cursor(HAND);
     soundtrack.loop();
     filmReelLoop.loop();
+    filmReelLoop.setVolume(0.2);
 }
 
 function draw() {
@@ -22,6 +23,7 @@ function draw() {
     }
     if (!filmReelLoop.isPlaying()) {
         filmReelLoop.loop();
+        filmReelLoop.setVolume(0.2);
     }
     background(255);
     animation(youWinAnim, width / 2, height / 2);
