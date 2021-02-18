@@ -4,6 +4,12 @@
 //mouse to control the paddle, click to start
 BWB_DEBUG = false;
 
+var cog1; // cog image
+var cog2; // cog image
+var cog3; // cog image
+var cogs; // list of cog images
+var cogs_interspacing_width_ratio = 0.8;
+
 var LEVELS_DATA = [
     // Level 1
     {
@@ -79,6 +85,8 @@ var LEVELS_DATA = [
         background: 'sprites/food/level3/background/monde_background.png',
         soundtrack: null,
         soundtrack_volume: 0.5,
+	// TODO ball setup() and draw()
+	// TODO paddle setup() and draw()
         bricks: {
             count: 10,
             width: 20,
@@ -91,6 +99,8 @@ var LEVELS_DATA = [
                 cogs = [cog1, cog2, cog3];
             },
             setup: function() {
+		var ROWS = 5;
+		var COLUMNS = 10;
                 var offsetX = width / 2 - (COLUMNS - 1) * (cogs_interspacing_width_ratio*cog1.width) / 2;
                 var offsetY = 80;
                     for (let h = 0; h < ROWS; h++) {
@@ -108,10 +118,10 @@ var LEVELS_DATA = [
                         }
                     }
                 },
-            draw: null,
-        },
+        draw: null,
         nextUrlSlug: "win",
     }
+  }
 ];
 
 // Sprites
@@ -137,13 +147,6 @@ var BRICK_H = 100;
 var BRICK_MARGIN = BRICK_W/20;
 var ROWS = 2;
 var COLUMNS = 5;
-
-var cog1; // cog image
-var cog2; // cog image
-var cog3; // cog image
-var cogs; // list of cog images
-var cogs_interspacing_width_ratio = 0.8;
-
 var LEVEL_BACKGROUND;
 
 function preload() {

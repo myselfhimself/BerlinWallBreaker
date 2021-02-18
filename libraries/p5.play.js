@@ -3452,8 +3452,8 @@ deltaTime = ((now - then) / 1000)/INTERVAL_60; // seconds since last frame
                 // instead of decimal. To fix this, we'll explicity tell parseInt to
                 // use a base of 10 (decimal). For more details on this issue, see
                 // http://stackoverflow.com/a/8763427/2422398.
-                var number1 = parseInt(from.substring(from.length-(3+digits1), from.length-4), 10);
-                var number2 = parseInt(to.substring(to.length-(3+digits2), to.length-4), 10);
+                var number1 = parseInt(from.substring(from.length-(4+digits1), from.length-4), 10);
+                var number2 = parseInt(to.substring(to.length-(4+digits2), to.length-4), 10);
 
                 //swap if inverted
                 if(number2<number1)
