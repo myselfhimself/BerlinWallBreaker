@@ -26,14 +26,14 @@ LEVELS_DATA = [
         paddingLeftDivider: 5,
         nextUrlSlug: "level2",
     },
-    // #3 - GAME OVER
+    // #3 - GAME OVER (LIVES==0) // TRY AGAIN (LIVES>0)
     {
         colorFunc: function () {
             return color(random(255), random(255), random(255));
         },
-        text: ["GAME", "OVER"],
+	text: BWB_GAME_LIVES == 0 ? ["GAME", "OVER"] : ["TRY", "AGAIN"],
         paddingLeftDivider: 2,
-        nextUrlSlug: "home",
+        nextUrlSlug: BWB_GAME_LIVES == 0 ? "home" : "level" + BWB_LEVEL_ID.toString(),
     },
     // #4 - YOU WIN
     {
@@ -46,7 +46,9 @@ LEVELS_DATA = [
     },
 
 ];
-console.log(LEVELS_DATA[BWB_LEVEL_ID]);
+// NO LIVES LEFT OR JUST LOST ONE LIFE? USE THE GAME OVER LEVEL DATA INSTEAD! OTHERWISE USE THE CURRENT LEVEL'S DATA.
+let LEVEL_DATA_ID = BWB_GAME_LIVES == 0 || BWB_LEVEL_URL_DATA.indexOf('lost') != -1 ? 3 : BWB_LEVEL_ID;
+console.log(LEVELS_DATA[LEVEL_DATA_ID]);
 
 let img;
 let fx;
@@ -76,11 +78,11 @@ function setup() {
     cursor(HAND);
     soundtrack.play();
 
-    points = font.textToPoints(LEVELS_DATA[BWB_LEVEL_ID].text[0], width / (LEVELS_DATA[BWB_LEVEL_ID].text[1].length * LEVELS_DATA[BWB_LEVEL_ID].paddingLeftDivider), height / 2, 70, {
+    points = font.textToPoints(LEVELS_DATA[LEVEL_DATA_ID].text[0], width / (LEVELS_DATA[LEVEL_DATA_ID].text[1].length * LEVELS_DATA[LEVEL_DATA_ID].paddingLeftDivider), height / 2, 70, {
         sampleFactor: 0.1,
         simplifyThreshold: 0
     });
-    points = points.concat(font.textToPoints(LEVELS_DATA[BWB_LEVEL_ID].text[1], width / (LEVELS_DATA[BWB_LEVEL_ID].text[1].length * LEVELS_DATA[BWB_LEVEL_ID].paddingLeftDivider), height / 2 + 70, 70, {
+    points = points.concat(font.textToPoints(LEVELS_DATA[LEVEL_DATA_ID].text[1], width / (LEVELS_DATA[LEVEL_DATA_ID].text[1].length * LEVELS_DATA[LEVEL_DATA_ID].paddingLeftDivider), height / 2 + 70, 70, {
         sampleFactor: 0.1,
         simplifyThreshold: 0
     }));
@@ -127,7 +129,7 @@ function mouseClicked() {
         EXPLODE_START_T = millis();
         explosion_sound.play();
     } else if (millis() - EXPLODE_START_T > 1000) {
-        redirectToUrlFor(LEVELS_DATA[BWB_LEVEL_ID].nextUrlSlug);
+        redirectToUrlFor(LEVELS_DATA[LEVEL_DATA_ID].nextUrlSlug);
     }
 }
 
@@ -154,7 +156,7 @@ function draw() {
         maxBri = 0.0001 * (1 + random(7));
         fx.setUniform('maxBri', maxBri);
 
-        fx.setUniform('color', LEVELS_DATA[BWB_LEVEL_ID].colorFunc()._array);
+        fx.setUniform('color', LEVELS_DATA[LEVEL_DATA_ID].colorFunc()._array);
     } else {
 
         // explode
@@ -181,7 +183,7 @@ function draw() {
 
         // Auto redirect to home after 10 seconds of explosion
         if (millis() - EXPLODE_START_T > 1000 * soundtrack.duration()) {
-            redirectToUrlFor(LEVELS_DATA[BWB_LEVEL_ID].nextUrlSlug);
+            redirectToUrlFor(LEVELS_DATA[LEVEL_DATA_ID].nextUrlSlug);
         }
     }
 

@@ -37,14 +37,16 @@ var BWB_DEFAULT_GAME_LIVES = 3;
 var BWB_GAME_LIVES = BWB_DEFAULT_GAME_LIVES;
 var BWB_DEFAULT_LEVEL_ID = 0;
 
-// LEVEL AND LIVES COUNT DETECTION AND REDIRECTION FROM URL
+// LEVEL ID, JUST LOST AND LIVES COUNT DETECTION AND REDIRECTION FROM URL
 // anchor must be like: #levelNlivesM (if provided), defaults to #level0lives3 (ie. level 1, 3 lives)
 var BWB_REDIRECTING = false;
 var BWB_LEVEL_KEYWORD = 'level'; //  levelN: current (or target level)
 var BWB_LIVES_KEYWORD = 'lives'; // livesN: remaining lives
+var BWB_LIVES_LOST_KEYWORD = 'lost'; // lost: just lost one life from last level. If omitted, nothing just lost.
 var BWB_LEVEL_ID = BWB_DEFAULT_LEVEL_ID; // Integer
 var BWB_LEVEL_URL_DATA = location.hash; // Default BWB_LEVEL_ID is full hash. Will be just an integer after then.
 
+// Detect level ID or set default level ID
 if (BWB_LEVEL_URL_DATA == undefined || BWB_LEVEL_URL_DATA.indexOf('#' + BWB_LEVEL_KEYWORD) != 0 || BWB_LEVEL_URL_DATA.length < ('#' + BWB_LEVEL_KEYWORD).length+1) {
     console.log('Level is unset, defaulting to 1');
     BWB_LEVEL_ID = 0;
@@ -52,16 +54,25 @@ if (BWB_LEVEL_URL_DATA == undefined || BWB_LEVEL_URL_DATA.indexOf('#' + BWB_LEVE
     BWB_LEVEL_ID = parseInt(BWB_LEVEL_URL_DATA.substr(('#' + BWB_LEVEL_KEYWORD).length, 1));
     console.log('Level is set: ' + BWB_LEVEL_ID.toString());
 }
+
+// Detect whether a life was just lost from last level
+if (BWB_LEVEL_URL_DATA == undefined || BWB_LEVEL_URL_DATA.indexOf(BWB_LIVES_LOST_KEYWORD) == -1) {
+  console.log('No life lost just recently - starting level for the first time');
+} else {
+  console.log('Just lost one life');
+}
+
+// Detect amount of lives left
 if (BWB_LEVEL_URL_DATA == undefined || BWB_LEVEL_URL_DATA.indexOf(BWB_LIVES_KEYWORD) == -1) {
-    //BWB_GAME_LIVES = BWB_GAME_LIVES;
+    BWB_GAME_LIVES = BWB_DEFAULT_GAME_LIVES;
     console.log('Lives is unset, defaulting to ' + BWB_GAME_LIVES.toString());
 } else {
-    BWB_GAME_LIVES = parseInt(BWB_LEVEL_URL_DATA.substr(('#' + BWB_LEVEL_KEYWORD + 'N' + BWB_LIVES_KEYWORD).length, 1));
+    BWB_GAME_LIVES = parseInt(BWB_LEVEL_URL_DATA.substr(BWB_LEVEL_URL_DATA.indexOf(BWB_LIVES_KEYWORD)+BWB_LIVES_KEYWORD.length, 1));
     console.log('Lives is set: ' + BWB_GAME_LIVES.toString());
 }
-// END OF LEVEL AND LIVES COUNT DETECTION
+// END OF LEVEL ID, JUST LOST AND LIVES COUNT DETECTION
 
-var BWB_URL_GAME_OVER = 'level_intro.html#level3';
+var BWB_URL_GAME_OVER = 'level_intro.html#level' + BWB_LEVEL_ID.toString() + 'lost' + 'lives'; // Router should append lives ID before redirecting
 var BWB_URL_WIN = 'youwin.html';
 var BWB_URL_HOME = 'home.html';
 var BWB_URL_MAKING_OF = 'makingof.html';
@@ -72,15 +83,15 @@ var BWB_URL_MAKING_OF = 'makingof.html';
 
 function urlFor(slug) {
     if (slug.indexOf('level') == 0) {
-        return 'level.html#level' + slug.substr('level'.length, 1);
+        return 'level.html#level' + slug.substr('level'.length, 1) + 'lives' + BWB_GAME_LIVES.toString();
     } else if (slug.indexOf('intro') == 0) {
-        return 'level_intro.html#level' + slug.substr('intro'.length, 1);
+        return 'level_intro.html#level' + slug.substr('intro'.length, 1) + 'lives' + BWB_GAME_LIVES.toString();
     } else if (slug == 'win') {
         return BWB_URL_WIN;
     } else if (slug == 'home') {
         return BWB_URL_HOME;
     } else if (slug == 'gameover') {
-        return BWB_URL_GAME_OVER;
+        return BWB_URL_GAME_OVER + BWB_GAME_LIVES.toString();
     } else if (slug == 'makingof') {
         return BWB_URL_MAKING_OF;
     }
@@ -103,5 +114,6 @@ function redirectToUrl(url) {
 }
 
 function redirectToGameOver() {
-    redirectToUrl(BWB_URL_GAME_OVER);
+    BWB_GAME_LIVES --;
+    redirectToUrlFor('gameover');
 }

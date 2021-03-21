@@ -119,8 +119,8 @@ var LEVELS_DATA = [
                     }
                 },
         draw: null,
-        nextUrlSlug: "win",
-    }
+    },
+    nextUrlSlug: "win"
   }
 ];
 
