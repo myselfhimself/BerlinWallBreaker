@@ -9,9 +9,9 @@ The low-tech aspect of this video-game (cookie-less, database-less, 1 html page 
 
 Cities of Caen and Le Havre are depicted because a boy and a girl lived apart in those cities after moving from Czech Republic and Canada.
 
-This video game entitled "Berlin Wall Breaker" is a message-present by the boy to the girl, asking her, if she would agree that the thick wall of relationship silence between them be broken. This wall is as thick as a Berlin wall.
+This video game entitled "Berlin Wall Breaker" is a message-present by the boy to the girl, asking her, if she would agree that the thick wall of relationship silence between them be broken. This wall is as thick as a Berlin wall. The girl in question has held GDevelop video game design workshops in Central Europe, so this artwork is a nod to her.
 
-Since nothing can buy love, this work is an attempt to start to reconstruct a friendship in the midst of an apparent eternal impossibility.
+Since nothing can buy love, this work aims to invite to a new friendship in the midst of an obvious eternal impossibility.
 
 TODO level1 and level2 background images
 

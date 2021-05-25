@@ -32,6 +32,6 @@ function draw() {
 function mouseReleased() {
     userStartAudio(); // Chrome hack
     if (mouseX < width && mouseX > 0 && mouseY < height && mouseY > 0) {
-        redirectToUrlFor('makingof');
+        redirectToUrlFor('about');
     }
 }

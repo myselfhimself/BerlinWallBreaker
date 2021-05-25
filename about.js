@@ -23,28 +23,25 @@ function draw() {
     textSize(30);
     fill(0);
 
-    addHeading('LOGICIELS');
-    addParagraph('p5.js, p5.play, Blender3D, Inkscape, Gimp, Audacity');
+    addHeading('ABOUT');
+    addParagraph('This food and stop-motion based p5js low-tech video game');
+    addParagraph('was made from November 2019 to June 2021 in Caen, France.');
     addLineBreak();
 
-    addHeading('NIVEAU 1 - Caen');
-    addParagraph('Pommes, chocolat noir');
+    addHeading('LOW-TECH');
+    addParagraph('This web game is cookieless and databaseless.');
+    addParagraph('It was coded and tested on a year 2008 Lenovo T400 laptop.');
+    addParagraph('My high-end computer died 2019 in a apple cider accident.');
+    addParagraph('No statistics gathered, game state is passed by URL.');
+    addParagraph('Cookies shall be eaten like crepes, not just accepted.');
     addLineBreak();
 
-    addHeading('NIVEAU 2 - Le Havre');
-    addParagraph('Betteraves, chocolat blanc');
-    addLineBreak();
-
-    addHeading('NIVEAU 3 - Monde');
-    addParagraph('Crêpes vegan, chocolat noir & blanc');
-    addLineBreak();
-
-    addHeading('p5 / WEBGL (accueil, transitions)');
-    addParagraph('Import OBJ, particules GLSL pixel shader, BLionTaleFont');
-    addLineBreak();
-
-    addHeading('MUSIQUE');
-    addParagraph('Arvo Pärt, Camille Saint-Saëns, Claude De Bussy');
+    addHeading('INSPIRATION');
+    addParagraph('100r.co - The 100 rabbits sailing video games studio;');
+    addParagraph('Marjorie Ober & Nicolas Chesnais @ LGM Conference 2020;');
+    addParagraph('L\'Envol by Samuel Yal - an COVID community stop-motion;');
+    addParagraph('Emmanuelle Turquet\'s Cuisine Thérapie;');
+    addParagraph('The infamous Ms. Crepes of Le Mans, a GDevelop teacher.');
 }
 
 function addLineBreak() {
@@ -67,6 +64,6 @@ function addParagraph(msg) {
 function mouseReleased() {
     userStartAudio(); // Chrome hack
     if (mouseX < width && mouseX > 0 && mouseY < height && mouseY > 0) {
-        redirectToUrlFor('about');
+        redirectToUrlFor('makingof');
     }
 }

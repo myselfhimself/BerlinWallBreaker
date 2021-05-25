@@ -75,6 +75,7 @@ if (BWB_LEVEL_URL_DATA == undefined || BWB_LEVEL_URL_DATA.indexOf(BWB_LIVES_KEYW
 var BWB_URL_GAME_OVER = 'level_intro.html#level' + BWB_LEVEL_ID.toString() + 'lost' + 'lives'; // Router should append lives ID before redirecting
 var BWB_URL_WIN = 'youwin.html';
 var BWB_URL_HOME = 'home.html';
+var BWB_URL_ABOUT = 'about.html';
 var BWB_URL_MAKING_OF = 'makingof.html';
 
 
@@ -90,6 +91,8 @@ function urlFor(slug) {
         return BWB_URL_WIN;
     } else if (slug == 'home') {
         return BWB_URL_HOME;
+    } else if (slug == 'about') {
+        return BWB_URL_ABOUT;
     } else if (slug == 'gameover') {
         return BWB_URL_GAME_OVER + BWB_GAME_LIVES.toString();
     } else if (slug == 'makingof') {
