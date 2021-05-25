@@ -22,7 +22,7 @@ LEVELS_DATA = [
     // #2 - LEVEL 3
     {
         colorFunc: whiteColor,
-        text: ["LEVEL3", "MONDE"],
+        text: ["LEVEL3", "WORLD"],
         paddingLeftDivider: 5,
         nextUrlSlug: "level2",
     },
