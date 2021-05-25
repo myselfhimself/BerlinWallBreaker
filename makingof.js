@@ -23,27 +23,27 @@ function draw() {
     textSize(30);
     fill(0);
 
-    addHeading('LOGICIELS');
-    addParagraph('p5.js, p5.play, Blender3D, Inkscape, Gimp, Audacity');
+    addHeading('SOFTWARE');
+    addParagraph('p5.js, p5.play, Blender3D, Inkscape, GIMP, Audacity');
     addLineBreak();
 
-    addHeading('NIVEAU 1 - Caen');
-    addParagraph('Pommes, chocolat noir');
+    addHeading('LEVEL 1 - Caen');
+    addParagraph('Apples, dark chocolate');
     addLineBreak();
 
-    addHeading('NIVEAU 2 - Le Havre');
-    addParagraph('Betteraves, chocolat blanc');
+    addHeading('LEVEL 2 - Le Havre');
+    addParagraph('Beetroot, white chocolate');
     addLineBreak();
 
-    addHeading('NIVEAU 3 - Monde');
-    addParagraph('Crêpes vegan, chocolat noir & blanc');
+    addHeading('LEVEL 3 - World');
+    addParagraph('Vegan crêpes, dark & white chocolate');
     addLineBreak();
 
-    addHeading('p5 / WEBGL (accueil, transitions)');
-    addParagraph('Import OBJ, particules GLSL pixel shader, BLionTaleFont');
+    addHeading('P5.js / WEBGL (home, level transitions)');
+    addParagraph('OBJ 3d model, GLSL pixel shader particles, BLionTaleFont');
     addLineBreak();
 
-    addHeading('MUSIQUE');
+    addHeading('MUSIC');
     addParagraph('Arvo Pärt, Camille Saint-Saëns, Claude De Bussy');
 }
 

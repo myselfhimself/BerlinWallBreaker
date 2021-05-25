@@ -24,12 +24,12 @@ function draw() {
     fill(0);
 
     addHeading('ABOUT');
-    addParagraph('This food and stop-motion based p5js low-tech video game');
-    addParagraph('was made from November 2019 to June 2021 in Caen, France.');
+    addParagraph('This breakout game uses 3d, food and stop-motion tricks.');
+    addParagraph('It was made from November 2019 to June 2021 in France.');
     addLineBreak();
 
     addHeading('LOW-TECH');
-    addParagraph('This web game is cookieless and databaseless.');
+    addParagraph('The web game is cookieless and databaseless.');
     addParagraph('It was coded and tested on a year 2008 Lenovo T400 laptop.');
     addParagraph('My high-end computer died 2019 in a apple cider accident.');
     addParagraph('No statistics gathered, game state is passed by URL.');
@@ -37,11 +37,11 @@ function draw() {
     addLineBreak();
 
     addHeading('INSPIRATION');
+    addParagraph('The beloved Ms. Crepes of Le Mans, a GDevelop teacher;');
     addParagraph('100r.co - The 100 rabbits sailing video games studio;');
-    addParagraph('Marjorie Ober & Nicolas Chesnais @ LGM Conference 2020;');
+    addParagraph('Marjorie Ober & N. Chesnais - Libre Graphics Meeting 2020;');
     addParagraph('L\'Envol by Samuel Yal - an COVID community stop-motion;');
-    addParagraph('Emmanuelle Turquet\'s Cuisine Thérapie;');
-    addParagraph('The infamous Ms. Crepes of Le Mans, a GDevelop teacher.');
+    addParagraph('Emmanuelle Turquet\'s Cuisine Thérapie.');
 }
 
 function addLineBreak() {
