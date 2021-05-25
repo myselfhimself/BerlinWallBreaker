@@ -13,10 +13,20 @@ This video game entitled "Berlin Wall Breaker" is a message-present by the boy t
 
 Since nothing can buy love, this work is an attempt to start to reconstruct a friendship in the midst of an apparent eternal impossibility.
 
-Perseverance in rewriting and finishing this game has been namely grown during a summer 2020 1500km-long bike trip from Caen (France) to Santiago de Compostela (Spain) over Laval, Mayenne, Saint-Emilion, Nerac, Lourdes, Roncesvalles, Burgos (Via Frances).
-TODO map picture
+TODO level1 and level2 background images
 
 ## Page 3
 
+Perseverance in rewriting and finishing this game has been namely grown during a summer 2020 1500km-long bike trip from Caen (France) to Santiago de Compostela (Spain) over Laval, Mayenne, Saint-Emilion, Nerac, Lourdes, Roncesvalles, Burgos (Via Frances).
+TODO map picture
+
+## Page 4
+
 At this date, it is yet unknown whether more crepes parties are possible with Ms. Crêpes, the girl of Le Mans.
-TODO making of picture
+TODO crepes picture (from making of)
+
+## Page 5
+
+This video game was inspired by my bird's fly cycle chocolate painting contribution to the L'Envol by Samuel Yal
+TODO video excerpt
+TODO video link
