@@ -126,6 +126,7 @@ var LEVELS_DATA = [
 
 // Sprites
 var paddle, ball, wallTop, wallBottom, wallLeft, wallRight;
+var paddleAnimation;
 var bricks;
 
 // Sound
@@ -170,6 +171,9 @@ function setup() {
     setupCanvas(false);
 
     paddle = createSprite(width / 2, height-11, 110, 20);
+    console.log("paddle loading start");
+    paddleAnimation = paddle.addAnimation('live', 'sprites/food/level1/paddle/paddle-01.png', 'sprites/food/level1/paddle/paddle-04.png');
+    console.log("paddle loading end");
     paddle.setCollider('rectangle');
     paddle.debug = BWB_DEBUG;
     paddle.immovable = true;
@@ -216,6 +220,8 @@ function mouseClicked() {
 
 function draw() {
     background(LEVEL_BACKGROUND);
+
+    paddle.changeAnimation('live');
 
     if(LEVELS_DATA[BWB_LEVEL_ID].soundtrack != null && soundtrack != undefined && !soundtrack.isPlaying()) {
         soundtrack.loop();
