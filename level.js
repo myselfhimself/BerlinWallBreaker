@@ -170,7 +170,7 @@ function preload() {
 function setup() {
     setupCanvas(false);
 
-    paddle = createSprite(width / 2, height-11, 110, 20);
+    paddle = createSprite(width / 2, height-11, 110, 46);
     console.log("paddle loading start");
     paddleAnimation = paddle.addAnimation('live', 'sprites/food/level1/paddle/paddle-01.png', 'sprites/food/level1/paddle/paddle-04.png');
     console.log("paddle loading end");
@@ -221,7 +221,7 @@ function mouseClicked() {
 function draw() {
     background(LEVEL_BACKGROUND);
 
-    paddle.changeAnimation('live');
+    paddle.setCollider('rectangle');
 
     if(LEVELS_DATA[BWB_LEVEL_ID].soundtrack != null && soundtrack != undefined && !soundtrack.isPlaying()) {
         soundtrack.loop();
