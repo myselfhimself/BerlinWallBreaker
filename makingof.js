@@ -67,6 +67,6 @@ function addParagraph(msg) {
 function mouseReleased() {
     userStartAudio(); // Chrome hack
     if (mouseX < width && mouseX > 0 && mouseY < height && mouseY > 0) {
-        redirectToUrlFor('about');
+        redirectToUrlFor('home');
     }
 }
