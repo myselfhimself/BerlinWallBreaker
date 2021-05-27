@@ -127,6 +127,7 @@ var LEVELS_DATA = [
 // Sprites
 var paddle, ball, wallTop, wallBottom, wallLeft, wallRight;
 var paddleAnimation;
+var ballAnimation;
 var bricks;
 
 // Sound
@@ -172,7 +173,7 @@ function setup() {
 
     paddle = createSprite(width / 2, height-11, 110, 46);
     console.log("paddle loading start");
-    paddleAnimation = paddle.addAnimation('live', 'sprites/food/level1/paddle/paddle-01.png', 'sprites/food/level1/paddle/paddle-04.png');
+    paddleAnimation = paddle.addAnimation('live', 'sprites/food/level1/paddle/paddle-001.png', 'sprites/food/level1/paddle/paddle-004.png');
     console.log("paddle loading end");
     paddle.setCollider('rectangle');
     paddle.debug = BWB_DEBUG;
@@ -203,9 +204,10 @@ function setup() {
     //the easiest way to avoid pesky multiple collision is to
     //have the ball bigger than the bricks
     ball = createSprite(BALL_START_POSITION_X(), BALL_START_POSITION_Y(), BALL_DIAMETER, BALL_DIAMETER);
-    ball.draw = function () {
-        ellipse(0, 0, BALL_DIAMETER, BALL_DIAMETER);
-    };
+    ballAnimation = ball.addAnimation('live', 'sprites/food/level1/ball/ball0.png', 'sprites/food/level1/ball/ball11.png');
+    // ball.draw = function () {
+    //     ellipse(0, 0, BALL_DIAMETER, BALL_DIAMETER);
+    // };
     ball.setCollider('circle');
     ball.debug = BWB_DEBUG;
     ball.maxSpeed = MAX_SPEED;
@@ -222,6 +224,7 @@ function draw() {
     background(LEVEL_BACKGROUND);
 
     paddle.setCollider('rectangle');
+    ball.setCollider('circle');
 
     if(LEVELS_DATA[BWB_LEVEL_ID].soundtrack != null && soundtrack != undefined && !soundtrack.isPlaying()) {
         soundtrack.loop();
