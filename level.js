@@ -34,11 +34,40 @@ var LEVELS_DATA = [
                 for (var r = 0; r < ROWS; r++)
                     for (var c = 0; c < COLUMNS; c++) {
                         var brick = createSprite(offsetX + c * (BRICK_W + BRICK_MARGIN), offsetY + r * (BRICK_H + BRICK_MARGIN), BRICK_W, BRICK_H);
-			if(c%2==0) {
-				var butterAnimation = brick.addAnimation('live', 'sprites/food/level1/bricks/butter/butter0.png', 'sprites/food/level1/bricks/butter/butter7.png');
-			} else {
-			var applesAnimation = brick.addAnimation('live', 'sprites/food/level1/bricks/apples/apples0.png', 'sprites/food/level1/bricks/apples/apples5.png');
-			}
+			    switch(c) {
+			      case 0:
+				brick.addAnimation('live', 'sprites/food/level1/bricks/butter/butter0.png', 'sprites/food/level1/bricks/butter/butter7.png');
+			        brick.rotationSpeed = 3;
+			      break;
+			      case 1:
+			        brick.addAnimation('live', 'sprites/food/level1/bricks/apples/apples0.png', 'sprites/food/level1/bricks/apples/apples5.png');
+			        //brick.rotationSpeed = -3;
+			        break;
+		              case 2:
+			        brick.addAnimation('live', 'sprites/food/level1/bricks/camembert/camembert.png');
+			        brick.rotationSpeed = 3;
+			      break;
+		              case 3:
+			        brick.addAnimation('live', 'sprites/food/level1/bricks/milk/milk.png');
+			        brick.rotationSpeed = -3;
+			      break;
+			      case 4:
+				brick.addAnimation('live', 'sprites/food/level1/bricks/nuts/nuts0.png', 'sprites/food/level1/bricks/nuts/nuts9.png');
+			        brick.rotationSpeed = 3;
+			        break;
+			      case 5:
+				brick.addAnimation('live', 'sprites/food/level1/bricks/oysters/oysters0.png', 'sprites/food/level1/bricks/oysters/oysters4.png');
+			        brick.rotationSpeed = -3;
+			        break;
+			      case 6:
+				brick.addAnimation('live', 'sprites/food/level1/bricks/scallops/scallops0.png', 'sprites/food/level1/bricks/scallops/scallops6.png');
+			        brick.rotationSpeed = 3;
+			        break;
+			      case 7:
+				brick.addAnimation('live', 'sprites/food/level1/bricks/carrots/carrots0.png', 'sprites/food/level1/bricks/carrots/carrots3.png');
+			        brick.rotationSpeed = -3;
+			        break;
+			    }
                         // brick.draw = function () {
                         //     ellipse(0, 0, BRICK_W, BRICK_H);
                         // };
@@ -131,8 +160,6 @@ var LEVELS_DATA = [
 
 // Sprites
 var paddle, ball, wallTop, wallBottom, wallLeft, wallRight;
-var paddleAnimation;
-var ballAnimation;
 var bricks;
 
 // Sound
@@ -178,7 +205,7 @@ function setup() {
 
     paddle = createSprite(width / 2, height-11, 110, 46);
     console.log("paddle loading start");
-    paddleAnimation = paddle.addAnimation('live', 'sprites/food/level1/paddle/paddle-001.png', 'sprites/food/level1/paddle/paddle-004.png');
+    paddle.addAnimation('live', 'sprites/food/level1/paddle/paddle-001.png', 'sprites/food/level1/paddle/paddle-004.png');
     console.log("paddle loading end");
     paddle.setCollider('rectangle');
     paddle.debug = BWB_DEBUG;
@@ -209,7 +236,7 @@ function setup() {
     //the easiest way to avoid pesky multiple collision is to
     //have the ball bigger than the bricks
     ball = createSprite(BALL_START_POSITION_X(), BALL_START_POSITION_Y(), BALL_DIAMETER, BALL_DIAMETER);
-    ballAnimation = ball.addAnimation('live', 'sprites/food/level1/ball/ball0.png', 'sprites/food/level1/ball/ball11.png');
+    ball.addAnimation('live', 'sprites/food/level1/ball/ball0.png', 'sprites/food/level1/ball/ball11.png');
     // ball.draw = function () {
     //     ellipse(0, 0, BALL_DIAMETER, BALL_DIAMETER);
     // };
