@@ -3437,11 +3437,13 @@ deltaTime = ((now - then) / 1000)/INTERVAL_60; // seconds since last frame
                 for (i = from.length-5; i >= 0; i--) {
                     if(from.charAt(i) >= '0' && from.charAt(i) <= '9')
                         digits1++;
+		    else break;
                 }
 
                 for (i = to.length-5; i >= 0; i--) {
                     if(to.charAt(i) >= '0' && to.charAt(i) <= '9')
                         digits2++;
+		    else break;
                 }
 
                 var prefix1 = from.substring(0, from.length-(4+digits1));
