@@ -24,7 +24,7 @@ function draw() {
     fill(0);
 
     addHeading('SOFTWARE');
-    addParagraph('p5.js, p5.play, Blender3D, Inkscape, GIMP, Audacity');
+    addParagraph('p5.js, p5.play, Blender3D, Inkscape, GIMP, G\'MIC, Audacity');
     addLineBreak();
 
     addHeading('LEVEL 1 - Caen');
