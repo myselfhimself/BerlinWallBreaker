@@ -34,17 +34,18 @@ var LEVELS_DATA = [
                 for (var r = 0; r < ROWS; r++)
                     for (var c = 0; c < COLUMNS; c++) {
                         var brick = createSprite(offsetX + c * (BRICK_W + BRICK_MARGIN), offsetY + r * (BRICK_H + BRICK_MARGIN), BRICK_W, BRICK_H);
-                        brick.draw = function () {
-                            ellipse(0, 0, BRICK_W, BRICK_H);
-                        };
-                        brick.setCollider('circle');
+			var applesAnimation = brick.addAnimation('live', 'sprites/food/level1/bricks/apples/apples0.png', 'sprites/food/level1/bricks/apples/apples5.png');
+                        // brick.draw = function () {
+                        //     ellipse(0, 0, BRICK_W, BRICK_H);
+                        // };
+                        brick.setCollider('circle',0,0,BRICK_W/2);
                         brick.debug = BWB_DEBUG;
                         brick.shapeColor = color(255, 255, 255);
                         bricks.add(brick);
                         brick.immovable = true;
                     }
             },
-            draw: null,
+	    draw:null
         },
         nextUrlSlug: "intro1",
     },
