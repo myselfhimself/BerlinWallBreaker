@@ -34,7 +34,11 @@ var LEVELS_DATA = [
                 for (var r = 0; r < ROWS; r++)
                     for (var c = 0; c < COLUMNS; c++) {
                         var brick = createSprite(offsetX + c * (BRICK_W + BRICK_MARGIN), offsetY + r * (BRICK_H + BRICK_MARGIN), BRICK_W, BRICK_H);
+			if(c%2==0) {
+				var butterAnimation = brick.addAnimation('live', 'sprites/food/level1/bricks/butter/butter0.png', 'sprites/food/level1/bricks/butter/butter7.png');
+			} else {
 			var applesAnimation = brick.addAnimation('live', 'sprites/food/level1/bricks/apples/apples0.png', 'sprites/food/level1/bricks/apples/apples5.png');
+			}
                         // brick.draw = function () {
                         //     ellipse(0, 0, BRICK_W, BRICK_H);
                         // };
