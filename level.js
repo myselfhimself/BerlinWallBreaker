@@ -18,6 +18,13 @@ var LEVELS_DATA = [
         soundtrack_volume: 1.0,
         ball_start_x: function(){return width / 2;},
         ball_start_y: function(){return height - 350;},
+	ball: { 
+	    setup: function() {
+                ball = createSprite(BALL_START_POSITION_X(), BALL_START_POSITION_Y(), BALL_DIAMETER, BALL_DIAMETER);
+                ball.addAnimation('live', 'sprites/food/level1/ball/ball0.png', 'sprites/food/level1/ball/ball11.png');
+                ball.setCollider('circle');
+	    }
+	},
         bricks: {
             count: 10,
             width: 20,
@@ -68,9 +75,6 @@ var LEVELS_DATA = [
 			        brick.rotationSpeed = -3;
 			        break;
 			    }
-                        // brick.draw = function () {
-                        //     ellipse(0, 0, BRICK_W, BRICK_H);
-                        // };
                         brick.setCollider('circle',0,0,BRICK_W/2);
                         brick.debug = BWB_DEBUG;
                         brick.shapeColor = color(255, 255, 255);
@@ -87,6 +91,13 @@ var LEVELS_DATA = [
         background: 'sprites/food/level2/background/lehavre_background.png',
         soundtrack: null,
         soundtrack_volume: 1.0,
+	ball: { 
+	    setup: function() {
+                ball = createSprite(BALL_START_POSITION_X(), BALL_START_POSITION_Y(), BALL_DIAMETER, BALL_DIAMETER);
+                ball.addAnimation('live', 'sprites/food/level2/ball/ball0.png', 'sprites/food/level2/ball/ball8.png');
+                ball.setCollider('circle');
+	    }
+	},
         bricks: {
             count: 10,
             width: 20,
@@ -120,6 +131,7 @@ var LEVELS_DATA = [
         soundtrack: null,
         soundtrack_volume: 0.5,
 	// TODO ball setup() and draw()
+	ball: {setup: null},
 	// TODO paddle setup() and draw()
         bricks: {
             count: 10,
@@ -233,14 +245,16 @@ function setup() {
         LEVELS_DATA[BWB_LEVEL_ID].bricks.setup();
     }
 
-    //the easiest way to avoid pesky multiple collision is to
-    //have the ball bigger than the bricks
-    ball = createSprite(BALL_START_POSITION_X(), BALL_START_POSITION_Y(), BALL_DIAMETER, BALL_DIAMETER);
-    ball.addAnimation('live', 'sprites/food/level1/ball/ball0.png', 'sprites/food/level1/ball/ball11.png');
-    // ball.draw = function () {
-    //     ellipse(0, 0, BALL_DIAMETER, BALL_DIAMETER);
-    // };
-    ball.setCollider('circle');
+    if(LEVELS_DATA[BWB_LEVEL_ID].ball.setup != null) {
+        LEVELS_DATA[BWB_LEVEL_ID].ball.setup();
+    } else {
+        //the easiest way to avoid pesky multiple collision is to
+        //have the ball bigger than the bricks
+        ball = createSprite(BALL_START_POSITION_X(), BALL_START_POSITION_Y(), BALL_DIAMETER, BALL_DIAMETER);
+        ball.addAnimation('live', 'sprites/food/level1/ball/ball0.png', 'sprites/food/level1/ball/ball11.png');
+        ball.setCollider('circle');
+    }
+
     ball.debug = BWB_DEBUG;
     ball.maxSpeed = MAX_SPEED;
     paddle.shapeColor = ball.shapeColor = color(255, 255, 255);
