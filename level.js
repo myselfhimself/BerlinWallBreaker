@@ -4,11 +4,17 @@
 //mouse to control the paddle, click to start
 BWB_DEBUG = false;
 
+// Sprites
+var paddle, ball, wallTop, wallBottom, wallLeft, wallRight;
+var bricks;
+
+// Level-3 related
 var cog1; // cog image
 var cog2; // cog image
 var cog3; // cog image
 var cogs; // list of cog images
 var cogs_interspacing_width_ratio = 0.8;
+
 
 var LEVELS_DATA = [
     // Level 1
@@ -18,6 +24,14 @@ var LEVELS_DATA = [
         soundtrack_volume: 1.0,
         ball_start_x: function(){return width / 2;},
         ball_start_y: function(){return height - 350;},
+	paddle: { 
+	    setup: function() {
+                paddle = createSprite(PADDLE_START_POSITION_X, PADDLE_START_POSITION_Y, PADDLE_W, PADDLE_H);
+                paddle.addAnimation('live', 'sprites/food/level1/paddle/paddle-001.png', 'sprites/food/level1/paddle/paddle-004.png');
+                paddle.setCollider('rectangle');
+	    }
+	},
+
 	ball: { 
 	    setup: function() {
                 ball = createSprite(BALL_START_POSITION_X(), BALL_START_POSITION_Y(), BALL_DIAMETER, BALL_DIAMETER);
@@ -91,6 +105,14 @@ var LEVELS_DATA = [
         background: 'sprites/food/level2/background/lehavre_background.png',
         soundtrack: null,
         soundtrack_volume: 1.0,
+	paddle: { 
+	    setup: function() {
+                paddle = createSprite(PADDLE_START_POSITION_X, PADDLE_START_POSITION_Y, PADDLE_W, PADDLE_H);
+                paddle.addAnimation('live', 'sprites/food/level2/paddle/paddle0.png', 'sprites/food/level2/paddle/paddle4.png');
+                paddle.setCollider('rectangle');
+	    }
+	},
+
 	ball: { 
 	    setup: function() {
                 ball = createSprite(BALL_START_POSITION_X(), BALL_START_POSITION_Y(), BALL_DIAMETER, BALL_DIAMETER);
@@ -133,6 +155,7 @@ var LEVELS_DATA = [
 	// TODO ball setup() and draw()
 	ball: {setup: null},
 	// TODO paddle setup() and draw()
+	paddle: {setup: null},
         bricks: {
             count: 10,
             width: 20,
@@ -170,10 +193,6 @@ var LEVELS_DATA = [
   }
 ];
 
-// Sprites
-var paddle, ball, wallTop, wallBottom, wallLeft, wallRight;
-var bricks;
-
 // Sound
 var brickExplodeSound;
 var paddleHitSound;
@@ -182,6 +201,10 @@ var bottomHitSound;
 var soundtrack;
 
 // Game constants
+var PADDLE_W = 146;
+var PADDLE_H = 10;
+var PADDLE_START_POSITION_X = BWB_WIDTH / 2;
+var PADDLE_START_POSITION_Y = BWB_HEIGHT-11;
 var BALL_DIAMETER = 30;
 var BALL_START_POSITION_X = function () { return LEVELS_DATA[BWB_LEVEL_ID].ball_start_x != undefined ? LEVELS_DATA[BWB_LEVEL_ID].ball_start_x() : width / 2;};
 var BALL_START_POSITION_Y = function () { return LEVELS_DATA[BWB_LEVEL_ID].ball_start_y != undefined ? LEVELS_DATA[BWB_LEVEL_ID].ball_start_y() : height - 200;};
@@ -215,11 +238,14 @@ function preload() {
 function setup() {
     setupCanvas(false);
 
-    paddle = createSprite(width / 2, height-11, 110, 46);
-    console.log("paddle loading start");
-    paddle.addAnimation('live', 'sprites/food/level1/paddle/paddle-001.png', 'sprites/food/level1/paddle/paddle-004.png');
-    console.log("paddle loading end");
-    paddle.setCollider('rectangle');
+
+    if(LEVELS_DATA[BWB_LEVEL_ID].paddle.setup != null) {
+        LEVELS_DATA[BWB_LEVEL_ID].paddle.setup();
+    } else {
+        paddle = createSprite(PADDLE_START_POSITION_X, PADDLE_START_POSITION_Y, PADDLE_W, PADDLE_H);
+        paddle.addAnimation('live', 'sprites/food/level1/paddle/paddle-001.png', 'sprites/food/level1/paddle/paddle-004.png');
+        paddle.setCollider('rectangle');
+    }
     paddle.debug = BWB_DEBUG;
     paddle.immovable = true;
 
