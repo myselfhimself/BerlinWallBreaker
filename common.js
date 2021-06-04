@@ -33,16 +33,16 @@ var BWB_GAME_STATE_PLAYING = 1;
 var BWB_GAME_STATE_WIN = 2;
 var BWB_GAME_STATE_PAUSED = 3;
 var BWB_GAME_STATE = BWB_GAME_STATE_PLAYING;
-var BWB_DEFAULT_GAME_LIVES = 3;
+var BWB_DEFAULT_GAME_LIVES = 5;
 var BWB_GAME_LIVES = BWB_DEFAULT_GAME_LIVES;
 var BWB_DEFAULT_LEVEL_ID = 0;
 
 // LEVEL ID, JUST LOST AND LIVES COUNT DETECTION AND REDIRECTION FROM URL
 // anchor must be like: #levelNlivesM (if provided), defaults to #level0lives3 (ie. level 1, 3 lives)
 var BWB_REDIRECTING = false;
-var BWB_LEVEL_KEYWORD = 'level'; //  levelN: current (or target level)
-var BWB_LIVES_KEYWORD = 'lives'; // livesN: remaining lives
-var BWB_LIVES_LOST_KEYWORD = 'lost'; // lost: just lost one life from last level. If omitted, nothing just lost.
+var BWB_LEVEL_KEYWORD = 'livarot'; //  levelN: current (or target level)
+var BWB_LIVES_KEYWORD = 'calva'; // livesN: remaining lives
+var BWB_LIVES_LOST_KEYWORD = 'yrpleut'; // lost: just lost one life from last level. If omitted, nothing just lost.
 var BWB_LEVEL_ID = BWB_DEFAULT_LEVEL_ID; // Integer
 var BWB_LEVEL_URL_DATA = location.hash; // Default BWB_LEVEL_ID is full hash. Will be just an integer after then.
 
@@ -72,7 +72,7 @@ if (BWB_LEVEL_URL_DATA == undefined || BWB_LEVEL_URL_DATA.indexOf(BWB_LIVES_KEYW
 }
 // END OF LEVEL ID, JUST LOST AND LIVES COUNT DETECTION
 
-var BWB_URL_GAME_OVER = 'level_intro.html#level' + BWB_LEVEL_ID.toString() + 'lost' + 'lives'; // Router should append lives ID before redirecting
+var BWB_URL_GAME_OVER = 'level_intro.html#' + BWB_LEVEL_KEYWORD + BWB_LEVEL_ID.toString() + BWB_LIVES_LOST_KEYWORD + BWB_LIVES_KEYWORD; // Router should append lives ID before redirecting
 var BWB_URL_WIN = 'youwin.html';
 var BWB_URL_HOME = 'home.html';
 var BWB_URL_ABOUT = 'about.html';
@@ -84,9 +84,9 @@ var BWB_URL_MAKING_OF = 'makingof.html';
 
 function urlFor(slug) {
     if (slug.indexOf('level') == 0) {
-        return 'level.html#level' + slug.substr('level'.length, 1) + 'lives' + BWB_GAME_LIVES.toString();
+        return 'level.html#' + BWB_LEVEL_KEYWORD + slug.substr('level'.length, 1) + BWB_LIVES_KEYWORD + BWB_GAME_LIVES.toString();
     } else if (slug.indexOf('intro') == 0) {
-        return 'level_intro.html#level' + slug.substr('intro'.length, 1) + 'lives' + BWB_GAME_LIVES.toString();
+        return 'level_intro.html#' + BWB_LEVEL_KEYWORD + slug.substr('intro'.length, 1) + BWB_LIVES_KEYWORD + BWB_GAME_LIVES.toString();
     } else if (slug == 'win') {
         return BWB_URL_WIN;
     } else if (slug == 'home') {

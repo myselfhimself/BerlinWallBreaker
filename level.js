@@ -15,6 +15,17 @@ var cog3; // cog image
 var cogs; // list of cog images
 var cogs_interspacing_width_ratio = 0.8;
 
+// Camera shaking on brick hit
+var CAMERA_SHAKING = false;
+// Number of frames that will have shaking
+var CAMERA_SHAKE_COUNTDOWN_DEFAULT = 50; // This must be an even number, for the camera to end up back in place
+var CAMERA_SHAKE_COUNTDOWN = CAMERA_SHAKE_COUNTDOWN_DEFAULT;
+var CAMERA_SHAKE_AMOUNT = 20; // amount of horizontal pixels
+
+// Ball speed
+var MAX_SPEED = 9;
+var BALL_SPEED = 0;
+
 
 var LEVELS_DATA = [
     // Level 1
@@ -33,6 +44,7 @@ var LEVELS_DATA = [
 	},
 
 	ball: { 
+	    speed: MAX_SPEED/2,
 	    setup: function() {
                 ball = createSprite(BALL_START_POSITION_X(), BALL_START_POSITION_Y(), BALL_DIAMETER, BALL_DIAMETER);
                 ball.addAnimation('live', 'sprites/food/level1/ball/ball0.png', 'sprites/food/level1/ball/ball11.png');
@@ -114,6 +126,7 @@ var LEVELS_DATA = [
 	},
 
 	ball: { 
+	    speed: MAX_SPEED/1.5,
 	    setup: function() {
                 ball = createSprite(BALL_START_POSITION_X(), BALL_START_POSITION_Y(), BALL_DIAMETER, BALL_DIAMETER);
                 ball.addAnimation('live', 'sprites/food/level2/ball/ball0.png', 'sprites/food/level2/ball/ball8.png');
@@ -130,20 +143,26 @@ var LEVELS_DATA = [
                 var offsetX = width / 2 - (COLUMNS - 1) * (BRICK_MARGIN + BRICK_W) / 2;
                 var offsetY = 80;
 
+		var brickId = 0;
                 for (var r = 0; r < ROWS; r++)
                     for (var c = 0; c < COLUMNS; c++) {
-                        var brick = createSprite(offsetX + c * (BRICK_W + BRICK_MARGIN), offsetY + r * (BRICK_H + BRICK_MARGIN), BRICK_W, BRICK_H);
-                        brick.draw = function () {
-                            rect(0, 0, BRICK_W, BRICK_H);
-                        };
-                        brick.setCollider('rectangle');
+			// Create square-sized bricks
+                        var brick = createSprite(offsetX + c * (BRICK_W + BRICK_MARGIN), offsetY + r * (BRICK_H + BRICK_MARGIN), BRICK_W, BRICK_W);
+			brick.addAnimation('live', 'sprites/food/level2/bricks/brick0.png', 'sprites/food/level2/bricks/brick9.png');
+			// Offset each brick's animation
+			brick.animation.changeFrame(brickId++ % 10);
+			brick.animation.frameDelay = 50;//(Math.floor(Math.random() * (90- 40)) + 40);
+                        brick.setCollider('rectangle',0,0,BRICK_W,BRICK_W);
                         brick.debug = BWB_DEBUG;
-                        brick.shapeColor = color(255, 255, 255);
                         bricks.add(brick);
                         brick.immovable = true;
                     }
             },
-            draw: null,
+            draw: function () {
+		for(var a=0; a<bricks.length;a++) {
+		    bricks[a].scale = Math.max(0.3,Math.sin((frameCount % 10000)/10000*180));
+		}
+	    },
         },
         nextUrlSlug: "intro2",
     },
@@ -153,7 +172,10 @@ var LEVELS_DATA = [
         soundtrack: null,
         soundtrack_volume: 0.5,
 	// TODO ball setup() and draw()
-	ball: {setup: null},
+	ball: {
+	    speed: MAX_SPEED, // same speed as level 2
+	    setup: null
+	},
 	// TODO paddle setup() and draw()
 	paddle: {setup: null},
         bricks: {
@@ -208,8 +230,6 @@ var PADDLE_START_POSITION_Y = BWB_HEIGHT-11;
 var BALL_DIAMETER = 30;
 var BALL_START_POSITION_X = function () { return LEVELS_DATA[BWB_LEVEL_ID].ball_start_x != undefined ? LEVELS_DATA[BWB_LEVEL_ID].ball_start_x() : width / 2;};
 var BALL_START_POSITION_Y = function () { return LEVELS_DATA[BWB_LEVEL_ID].ball_start_y != undefined ? LEVELS_DATA[BWB_LEVEL_ID].ball_start_y() : height - 200;};
-var MAX_SPEED = 9;
-var BALL_SPEED = 0;
 var WALL_THICKNESS = 0;
 var BRICK_W = 100;
 var BRICK_H = 100;
@@ -320,6 +340,16 @@ function draw() {
     } else {
         gameLogic();
     }
+
+    if(CAMERA_SHAKING) {
+        if(CAMERA_SHAKE_COUNTDOWN > 0) {
+	    camera.position.x += (CAMERA_SHAKE_COUNTDOWN % 2 == 0) ? -1*CAMERA_SHAKE_AMOUNT : CAMERA_SHAKE_AMOUNT;
+	    CAMERA_SHAKE_COUNTDOWN--;
+	} else {
+	    CAMERA_SHAKING = false;
+	    CAMERA_SHAKE_COUNTDOWN = CAMERA_SHAKE_COUNTDOWN_DEFAULT;
+	}
+    }
 }
 
 function gameLogic() {
@@ -341,7 +371,7 @@ function gameLogic() {
             newDirection *= -1.0;
             print("flipped");
         }
-        ball.setSpeed(MAX_SPEED, newDirection + swing);
+        ball.setSpeed(LEVELS_DATA[BWB_LEVEL_ID].ball.speed, newDirection + swing);
         BALL_SPEED = ball.getSpeed();
         console.log(ball.getDirection() + swing);
     }
@@ -425,13 +455,18 @@ function unpause() {
 
 function mousePressed() {
     if (BWB_GAME_STATE == BWB_GAME_STATE_PLAYING && ball.velocity.x == 0 && ball.velocity.y == 0) {
-        ball.setSpeed(MAX_SPEED, random(90 - 10, 90 + 10));
+        ball.setSpeed(LEVELS_DATA[BWB_LEVEL_ID].ball.speed, random(90 - 10, 90 + 10));
     } else if(BWB_GAME_STATE == BWB_GAME_STATE_PAUSED) {
         unpause();
     }
 }
 
+function shakeCamera() {
+    CAMERA_SHAKING = true;
+}
+
 function brickHit(ball, brick) {
+    shakeCamera(); 
     brick.remove();
     brickExplodeSound.play();
 }
