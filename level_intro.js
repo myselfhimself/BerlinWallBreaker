@@ -4,25 +4,33 @@
 var whiteColor = function () {
     return color(255, 255, 255);
 };
+var LEVEL_LANG_KEYWORD = BWB_LANG == BWB_LANG_FR ? "NIVEAU" : "LEVEL";
+var LEVEL_GAME_OVER_KEYWORDS = BWB_LANG == BWB_LANG_FR ? ["T'AS", "PERDU"] : ["GAME", "OVER"];
+var LEVEL_TRY_AGAIN_KEYWORDS = BWB_LANG == BWB_LANG_FR ? ["ESSAIE", "ENCORE"] : ["TRY", "AGAIN"];
+
+function level_title(levelNumber) {
+    return LEVEL_LANG_KEYWORD + levelNumber.toString();
+}
+
 LEVELS_DATA = [
     // #0 - LEVEL 0
     {
         colorFunc: whiteColor,
-        text: ["LEVEL1", "CAEN"],
+        text: [level_title(1), "CAEN"],
         paddingLeftDivider: 5,
         nextUrlSlug: "level0",
     },
     // #1 - LEVEL 2
     {
         colorFunc: whiteColor,
-        text: ["LEVEL2", "LEHAVRE"],
+        text: [level_title(2), "LEHAVRE"],
         paddingLeftDivider: 5,
         nextUrlSlug: "level1",
     },
     // #2 - LEVEL 3
     {
         colorFunc: whiteColor,
-        text: ["LEVEL3", "WORLD"],
+        text: [level_title(3), "WORLD"],
         paddingLeftDivider: 5,
         nextUrlSlug: "level2",
     },
@@ -31,7 +39,7 @@ LEVELS_DATA = [
         colorFunc: function () {
             return color(random(255), random(255), random(255));
         },
-	text: BWB_GAME_LIVES == 0 ? ["GAME", "OVER"] : ["TRY", "AGAIN"],
+	text: BWB_GAME_LIVES == 0 ? LEVEL_GAME_OVER_KEYWORDS : LEVEL_TRY_AGAIN_KEYWORDS,
         paddingLeftDivider: 2,
         nextUrlSlug: BWB_GAME_LIVES == 0 ? "home" : "level" + BWB_LEVEL_ID.toString(),
     },

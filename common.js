@@ -26,6 +26,12 @@ function setupCanvas(withWebGL /*default: true*/) {
     centerCanvas();
 }
 
+// GAME LOCALIZATION 
+var BWB_LANG_FR = 'fr';
+var BWB_LANG_EN = 'en';
+var BWB_LANG_KEYWORD = 'langueter';
+var BWB_DEFAULT_LANG = BWB_LANG_FR;
+var BWB_LANG = BWB_DEFAULT_LANG;
 
 // GAME LOGIC
 var BWB_GAME_STATE_LOSE = 0;
@@ -45,6 +51,16 @@ var BWB_LIVES_KEYWORD = 'calva'; // livesN: remaining lives
 var BWB_LIVES_LOST_KEYWORD = 'yrpleut'; // lost: just lost one life from last level. If omitted, nothing just lost.
 var BWB_LEVEL_ID = BWB_DEFAULT_LEVEL_ID; // Integer
 var BWB_LEVEL_URL_DATA = location.hash; // Default BWB_LEVEL_ID is full hash. Will be just an integer after then.
+
+// Detect language
+if (BWB_LEVEL_URL_DATA == undefined || BWB_LEVEL_URL_DATA.indexOf(BWB_LANG_KEYWORD) == -1) {
+    console.log('Language is unset, defaulting to ' + BWB_DEFAULT_LANG);
+    BWB_LANG = BWB_DEFAULT_LANG;
+} else {
+    BWB_LANG = BWB_LEVEL_URL_DATA.substr(BWB_LEVEL_URL_DATA.indexOf(BWB_LANG_KEYWORD)+BWB_LANG_KEYWORD.length, 2);
+    console.log('Language is set: ' + BWB_LANG);
+}
+
 
 // Detect level ID or set default level ID
 if (BWB_LEVEL_URL_DATA == undefined || BWB_LEVEL_URL_DATA.indexOf('#' + BWB_LEVEL_KEYWORD) != 0 || BWB_LEVEL_URL_DATA.length < ('#' + BWB_LEVEL_KEYWORD).length+1) {
@@ -74,34 +90,40 @@ if (BWB_LEVEL_URL_DATA == undefined || BWB_LEVEL_URL_DATA.indexOf(BWB_LIVES_KEYW
 
 var BWB_URL_GAME_OVER = 'level_intro.html#' + BWB_LEVEL_KEYWORD + BWB_LEVEL_ID.toString() + BWB_LIVES_LOST_KEYWORD + BWB_LIVES_KEYWORD; // Router should append lives ID before redirecting
 var BWB_URL_WIN = 'youwin.html';
-var BWB_URL_HOME = 'index.html';
+var BWB_URL_HOME = 'home.html';
 var BWB_URL_ABOUT = 'about.html';
 var BWB_URL_MAKING_OF = 'makingof.html';
+var BWB_URL_HOW_TO = 'howto.html';
 
 
-// TODO GAME OVER PARAMETERS PASSING (level + lives)
-// TODO GAME OVER TO TRY AGAIN TEXT AS LONG AS LIVES ARE NOT FINISHED
-
-function urlFor(slug) {
+function urlFor(slug, lang) {
+    var nextUrl = '';
     if (slug.indexOf('level') == 0) {
-        return 'level.html#' + BWB_LEVEL_KEYWORD + slug.substr('level'.length, 1) + BWB_LIVES_KEYWORD + BWB_GAME_LIVES.toString();
+        nextUrl = 'level.html#' + BWB_LEVEL_KEYWORD + slug.substr('level'.length, 1) + BWB_LIVES_KEYWORD + BWB_GAME_LIVES.toString();
     } else if (slug.indexOf('intro') == 0) {
-        return 'level_intro.html#' + BWB_LEVEL_KEYWORD + slug.substr('intro'.length, 1) + BWB_LIVES_KEYWORD + BWB_GAME_LIVES.toString();
+        nextUrl = 'level_intro.html#' + BWB_LEVEL_KEYWORD + slug.substr('intro'.length, 1) + BWB_LIVES_KEYWORD + BWB_GAME_LIVES.toString();
     } else if (slug == 'win') {
-        return BWB_URL_WIN;
+        nextUrl = BWB_URL_WIN;
     } else if (slug == 'home') {
-        return BWB_URL_HOME;
+        nextUrl = BWB_URL_HOME;
     } else if (slug == 'about') {
-        return BWB_URL_ABOUT;
+        nextUrl = BWB_URL_ABOUT;
     } else if (slug == 'gameover') {
-        return BWB_URL_GAME_OVER + BWB_GAME_LIVES.toString();
+        nextUrl = BWB_URL_GAME_OVER + BWB_GAME_LIVES.toString();
     } else if (slug == 'makingof') {
-        return BWB_URL_MAKING_OF;
+        nextUrl = BWB_URL_MAKING_OF;
+    } else if (slug == 'howto') {
+        nextUrl = BWB_URL_HOW_TO;
     }
+
+    return nextUrl + (nextUrl.indexOf('#') != -1 ? '' : '#') + BWB_LANG_KEYWORD + lang;
 }
 
-function redirectToUrlFor(slug) {
-    redirectToUrl(urlFor(slug));
+function redirectToUrlFor(slug, lang) {
+    if(lang==undefined) {
+        lang = BWB_LANG == undefined ? BWB_DEFAULT_LANG : BWB_LANG;
+    }
+    redirectToUrl(urlFor(slug, lang));
 }
 
 function redirectToUrl(url) {

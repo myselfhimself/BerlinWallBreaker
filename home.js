@@ -151,6 +151,6 @@ function mouseReleased() {
             HOME_STATE = HOME_STATE_MENU;
         }
     } else if(mouseOverStart()) {
-        redirectToUrlFor('intro0');
+        redirectToUrlFor('howto');
     }
 }
