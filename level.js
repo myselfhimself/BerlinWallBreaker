@@ -171,13 +171,21 @@ var LEVELS_DATA = [
         background: 'sprites/food/level3/background/monde_background.png',
         soundtrack: null,
         soundtrack_volume: 0.5,
-	// TODO ball setup() and draw()
 	ball: {
 	    speed: MAX_SPEED, // same speed as level 2
-	    setup: null
+	    setup: function() {
+                ball = createSprite(BALL_START_POSITION_X(), BALL_START_POSITION_Y(), BALL_DIAMETER, BALL_DIAMETER);
+                ball.addAnimation('live', 'sprites/food/level3/ball/ball0.png', 'sprites/food/level3/ball/ball5.png');
+                ball.setCollider('circle');
+	    }
 	},
-	// TODO paddle setup() and draw()
-	paddle: {setup: null},
+	paddle: { 
+	    setup: function() {
+                paddle = createSprite(PADDLE_START_POSITION_X, PADDLE_START_POSITION_Y, PADDLE_W, PADDLE_H);
+                paddle.addAnimation('live', 'sprites/food/level3/paddle/paddle0.png', 'sprites/food/level3/paddle/paddle3.png');
+                paddle.setCollider('rectangle');
+	    }
+	},
         bricks: {
             count: 10,
             width: 20,
