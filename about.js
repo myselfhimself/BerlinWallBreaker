@@ -31,9 +31,9 @@ function draw() {
     addHeading('LOW-TECH');
     addParagraph('The web game is cookieless and databaseless.');
     addParagraph('It was coded and tested on a year 2008 Lenovo T400 laptop.');
+    addParagraph('Photographs were made on a 2010 Samsung Galaxy S phone.');
     addParagraph('My high-end computer died 2019 in a apple cider accident.');
     addParagraph('No statistics gathered, game state is passed by URL.');
-    addParagraph('Cookies shall be eaten like crepes, not just accepted.');
     addLineBreak();
 
     addHeading('INSPIRATION');
