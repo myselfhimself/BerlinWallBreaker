@@ -30,7 +30,7 @@ LEVELS_DATA = [
     // #2 - LEVEL 3
     {
         colorFunc: whiteColor,
-        text: [level_title(3), "WORLD"],
+        text: [level_title(3), BWB_LANG == BWB_LANG_FR ? "MONDE" : "WORLD"],
         paddingLeftDivider: 5,
         nextUrlSlug: "level2",
     },
